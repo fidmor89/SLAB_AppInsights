@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SLAB_AI
 {
+    using Microsoft.ApplicationInsights.Extensibility;
     public class AI_Integration
     {
 
@@ -16,7 +17,7 @@ namespace SLAB_AI
         public AI_Integration(String IK)
         {
             if (String.IsNullOrWhiteSpace(IK)!=null)
-            Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Active.InstrumentationKey = IK;
+            TelemetryConfiguration.Active.InstrumentationKey = IK;
         }
 
 
@@ -27,7 +28,7 @@ namespace SLAB_AI
         public void setInstrumentationKey(String IK)
         {
             if (String.IsNullOrWhiteSpace(IK) != null)
-            Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Active.InstrumentationKey = IK;
+            TelemetryConfiguration.Active.InstrumentationKey = IK;
         }
     }
 }
