@@ -9,15 +9,14 @@ namespace SLAB_AI
     public class AI_Integration
     {
 
-        private String sInstrumentationKey;
-
         /// <summary>
         /// Main constructor for the library project.
         /// </summary>
         /// <param name="IK">Instrumentation key to be used.</param>
         public AI_Integration(String IK)
         {
-            this.sInstrumentationKey = IK;
+            if (String.IsNullOrWhiteSpace(IK)!=null)
+            Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Active.InstrumentationKey = IK;
         }
 
 
@@ -27,7 +26,8 @@ namespace SLAB_AI
         /// <param name="IK">Instrumentation Key to set, passed as parameter</param>
         public void setInstrumentationKey(String IK)
         {
-            this.sInstrumentationKey = IK;
+            if (String.IsNullOrWhiteSpace(IK) != null)
+            Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Active.InstrumentationKey = IK;
         }
     }
 }
