@@ -24,7 +24,10 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
         /// <param name="value">The current entry.</param>
         public void OnNext(EventEntry value)
         {
-            EventEntryToAITrace(value);
+            if (value != null) 
+            {
+                EventEntryToAITrace(value);
+            }
         }
 
         /// <summary>
@@ -48,7 +51,8 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
         /// <param name="value">The current entry.</param>
         private void EventEntryToAITrace(EventEntry value)
         {
-            TraceTelemetry trace = new TraceTelemetry();
+            TraceTelemetry trace = new TraceTelemetry(value.FormattedMessage, LogEventLevelExtensions.ToSeverityLevel(value.Schema.Level));
+            trace.Timestamp = value.Timestamp;
             telemetryClient.TrackTrace(trace);
         }
     }

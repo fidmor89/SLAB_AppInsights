@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,9 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
         }
         public static SinkSubscription<ApplicationInsightsSink> LogToTrackTrace(this IObservable<EventEntry> eventStream)
         {
-         var sink = new ApplicationInsightsSink(String InstrumentationKey);
-         var subscription = eventStream.Subscribe(sink);
-         return new SinkSubscription<ApplicationInsightsSink>(subscription, sink);
+            var sink = new ApplicationInsightsSink(String InstrumentationKey);
+            var subscription = eventStream.Subscribe(sink);
+            return new SinkSubscription<ApplicationInsightsSink>(subscription, sink);
         }
     }
 }
