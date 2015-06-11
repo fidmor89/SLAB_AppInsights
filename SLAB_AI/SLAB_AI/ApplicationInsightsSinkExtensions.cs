@@ -9,15 +9,16 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
 {
     public static class ApplicationInsightsSinkExtensions
     {
-        public static EventListener CreateListener()
+        public static EventListener CreateListener(String InstrumentationKey)
         {
             var listener = new ObservableEventListener();
-            listener.LogToTrackTrace(host, port, recipients, subject, credentials, formatter);
+            listener.LogToApplicationInsights(InstrumentationKey);
             return listener;
         }
-        public static SinkSubscription<ApplicationInsightsSink> LogToTrackTrace(this IObservable<EventEntry> eventStream)
+        public static SinkSubscription<ApplicationInsightsSink> LogToApplicationInsights(this IObservable<EventEntry> eventStream,
+            String InstrumentationKey)
         {
-            var sink = new ApplicationInsightsSink(String InstrumentationKey);
+            var sink = new ApplicationInsightsSink(InstrumentationKey);
             var subscription = eventStream.Subscribe(sink);
             return new SinkSubscription<ApplicationInsightsSink>(subscription, sink);
         }

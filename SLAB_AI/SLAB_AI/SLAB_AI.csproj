@@ -55,7 +55,6 @@
     <Compile Include="AI_Integration.cs" />
     <Compile Include="ApplicationInsightsSink.cs" />
     <Compile Include="ApplicationInsightsSinkExtensions.cs" />
-    <Compile Include="IObserver.cs" />
     <Compile Include="LogEventLevelExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
