@@ -16,8 +16,10 @@ namespace SLAB_AI
         /// <param name="IK">Instrumentation key to be used.</param>
         public AI_Integration(String IK)
         {
-            if (String.IsNullOrWhiteSpace(IK)!=null)
-            TelemetryConfiguration.Active.InstrumentationKey = IK;
+            if (!String.IsNullOrWhiteSpace(IK))
+            {
+                TelemetryConfiguration.Active.InstrumentationKey = IK;
+            }
         }
 
 
