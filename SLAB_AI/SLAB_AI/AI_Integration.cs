@@ -30,7 +30,9 @@ namespace SLAB_AI
         public void setInstrumentationKey(String IK)
         {
             if (String.IsNullOrWhiteSpace(IK) != null)
-            TelemetryConfiguration.Active.InstrumentationKey = IK;
+            {
+                TelemetryConfiguration.Active.InstrumentationKey = IK;
+            }
         }
     }
 }
