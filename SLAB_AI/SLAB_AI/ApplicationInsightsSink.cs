@@ -106,6 +106,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
             #endregion EventValue Properties
 
             telemetryClient.TrackTrace(trace);
+            telemetryClient.Flush();
         }
     }
 }
