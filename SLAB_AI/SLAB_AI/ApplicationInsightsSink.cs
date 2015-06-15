@@ -1,4 +1,5 @@
 ﻿using System;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,21 +11,28 @@ using System.Diagnostics.Eventing.Reader;
 using System.Diagnostics.Tracing;
 using System.Globalization;
 using System.Threading;
+using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Utility;
 
-namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
+namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
 {
+
     public sealed class ApplicationInsightsSink : IObserver<EventEntry>
     {
+        /// <summary>
+        /// TelemetryClient used for sending logs to Application Insights
+        /// </summary>
         private TelemetryClient telemetryClient;
         /// <summary>
-        /// Provides the sink with new data to write to Application Insights.
+        /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class with the specified Instrumentation Key and the optional contextInitialiazers.
         /// </summary>
-        /// <param name="InstrumentationKey">The current entry.</param>
-        /// <param name="contextInitializers"></param>
+        /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
+        /// <param name="contextInitializers">The (optional) Application Insights context initializers.</param>
+        /// <exception cref=""
         public ApplicationInsightsSink(String InstrumentationKey,params IContextInitializer[] contextInitializers)
         {
             telemetryClient = new TelemetryClient();
             TelemetryConfiguration.Active.InstrumentationKey = InstrumentationKey;
+
             if (contextInitializers != null)
             {
                 foreach (var contextInitializer in contextInitializers)
@@ -33,6 +41,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
                 }
             }
         }
+
         /// <summary>
         /// Provides the sink with new data to write to Application Insights.
         /// </summary>
@@ -67,28 +76,20 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
         private void EventEntryToAITrace(EventEntry value)
         {
             int i; // iterator
-            TraceTelemetry trace = new TraceTelemetry(value.FormattedMessage, LogEventLevelExtensions.ToSeverityLevel(value.Schema.Level));
+            TraceTelemetry trace = new TraceTelemetry();
+            if (!String.IsNullOrEmpty(value.FormattedMessage))
+                trace.Message = value.FormattedMessage;
+            trace.SeverityLevel = LogEventLevelExtensions.ToSeverityLevel(value.Schema.Level);
             trace.Timestamp = value.Timestamp;
 
             #region EventSchema Properties
-
-            trace.Properties.Add("Id", value.Schema.Id.ToString());
             trace.Properties.Add("Event Name", value.Schema.EventName);
-            //trace.Properties.Add("Keywords", value.Schema.Keywords.ToString()) Is this needed? .ToString() is deprecated
-            trace.Properties.Add("Keywords", value.Schema.KeywordsDescription);
-            //trace.Properties.Add("Operation Code", value.Schema.Opcode.ToString()); Is this needed? .ToString() is deprecated
+            if (value.Schema.KeywordsDescription != null)
+                trace.Properties.Add("Keywords", value.Schema.KeywordsDescription);
             trace.Properties.Add("Operation Code Name", value.Schema.OpcodeName);
-            // Review if Payload is necesary and what's the best name for each one (key identifier on trace properties dictionary).
-            if (value.Schema.Payload != null) 
-            {
-                for (i = 0; i < value.Schema.Payload.Length; i++)
-                {
-                    trace.Properties.Add("Paylod " + i.ToString(), value.Schema.Payload[i]);
-                }
-            }
-            trace.Properties.Add("Provider Id", value.Schema.ProviderId.ToString()); // Is this needed?
+            trace.Properties.Add("Provider Id", value.Schema.ProviderId.ToString());
             trace.Properties.Add("Provider Name", value.Schema.ProviderName);
-            //trace.Properties.Add("Task", value.Schema.Task.ToString()); Is this needed? .ToString() is deprecated
+            trace.Properties.Add("Task", value.Schema.Task.ToString());
             trace.Properties.Add("Task Name", value.Schema.TaskName);
             trace.Properties.Add("Event Version", value.Schema.Version.ToString());
 
@@ -97,26 +98,22 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
             #region EventValue Properties
 
             trace.Properties.Add("Activity Id", value.ActivityId.ToString());
-            trace.Properties.Add("Event Id", value.EventId.ToString()); // Is this equals to trace.Properties.Add("Id", value.Schema.Id.ToString());?
-            // Review if Payload is necesary and what's the best name for each one (key identifier on trace properties dictionary).
+            trace.Properties.Add("Event Id", value.EventId.ToString());
             if (value.Payload != null)
             {
                 i = 0;
                 foreach (object o in value.Payload)
                 {
-                    trace.Properties.Add("Event Payload " + i.ToString(), o.ToString());
+                    trace.Properties.Add(value.Schema.Payload[i], o.ToString());
                     i++;
                 }
             }
             trace.Properties.Add("Process Id", value.ProcessId.ToString());
-            trace.Properties.Add("Event Provider Id", value.ProviderId.ToString()); // Is this equals to  trace.Properties.Add("Provider Id", value.Schema.ProviderId.ToString());
-            trace.Properties.Add("Related Activity Id", value.RelatedActivityId.ToString());
             trace.Properties.Add("Thread Id", value.ThreadId.ToString());
-            trace.Properties.Add("Formatted TimeStamp", value.GetFormattedTimestamp((new CultureInfo(Thread.CurrentThread.CurrentCulture.LCID)).DateTimeFormat.FullDateTimePattern)); // Is this needed? Can it replace or be replaced by trace.Timestamp = value.Timestamp;
-
             #endregion EventValue Properties
-
+            //call the TrackTrace method to send the log to Application Insights
             telemetryClient.TrackTrace(trace);
+            // flush the telemetry
             telemetryClient.Flush();
         }
     }

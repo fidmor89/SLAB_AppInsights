@@ -6,11 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
+namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
 {
-    public static class LogEventLevelExtensions
+    internal static class LogEventLevelExtensions
     {
-
+        /// <summary>
+        /// Converts the Event level to the severity level.
+        /// </summary>
+        /// <param name="logEventLevel">The log event level.</param>
+        /// <returns>The severity level associated to that Event level</returns>
+        /// <exception cref="System.ArgumentOutOfRangeException">The EventLevel is out of range</exception>
         public static SeverityLevel ToSeverityLevel(this EventLevel logEventLevel)
         {
             switch (logEventLevel)
@@ -33,3 +38,4 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
 
     }
 }
+
