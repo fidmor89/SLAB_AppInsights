@@ -16,11 +16,22 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
     public sealed class ApplicationInsightsSink : IObserver<EventEntry>
     {
         private TelemetryClient telemetryClient;
-        public ApplicationInsightsSink(String InstrumentationKey)
+        /// <summary>
+        /// Provides the sink with new data to write to Application Insights.
+        /// </summary>
+        /// <param name="InstrumentationKey">The current entry.</param>
+        /// <param name="contextInitializers"></param>
+        public ApplicationInsightsSink(String InstrumentationKey,params IContextInitializer[] contextInitializers)
         {
             telemetryClient = new TelemetryClient();
             TelemetryConfiguration.Active.InstrumentationKey = InstrumentationKey;
-            
+            if (contextInitializers != null)
+            {
+                foreach (var contextInitializer in contextInitializers)
+                {
+                    TelemetryConfiguration.Active.ContextInitializers.Add(contextInitializer);
+                }
+            }
         }
         /// <summary>
         /// Provides the sink with new data to write to Application Insights.
@@ -50,7 +61,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.SLAB_AI
 
         }
         /// <summary>
-        /// gets the SLAB log and convert to ApplicationInsights TraceTelemetry
+        /// Gets the SLAB log and convert to ApplicationInsights TraceTelemetry
         /// </summary>
         /// <param name="value">The current entry.</param>
         private void EventEntryToAITrace(EventEntry value)
