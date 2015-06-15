@@ -52,9 +52,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationInsightsSink.cs" />
+    <Compile Include="Sinks\ApplicationInsightsSink.cs" />
     <Compile Include="ApplicationInsightsSinkExtensions.cs" />
-    <Compile Include="LogEventLevelExtensions.cs" />
+    <Compile Include="Utility\LogEventLevelExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

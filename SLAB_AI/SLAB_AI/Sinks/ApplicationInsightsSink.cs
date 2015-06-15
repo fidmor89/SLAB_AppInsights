@@ -11,9 +11,9 @@ using System.Diagnostics.Eventing.Reader;
 using System.Diagnostics.Tracing;
 using System.Globalization;
 using System.Threading;
-using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Utility;
+using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility;
 
-namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
+namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 {
 
     public sealed class ApplicationInsightsSink : IObserver<EventEntry>
@@ -27,7 +27,6 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
         /// </summary>
         /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
         /// <param name="contextInitializers">The (optional) Application Insights context initializers.</param>
-        /// <exception cref=""
         public ApplicationInsightsSink(String InstrumentationKey,params IContextInitializer[] contextInitializers)
         {
             telemetryClient = new TelemetryClient();

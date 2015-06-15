@@ -1,4 +1,5 @@
 ﻿using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
