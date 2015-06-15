@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLAB_AI", "SLAB_AI\SLAB_AI.csproj", "{7EE56A78-9A8E-404F-B3F1-D07877D863E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticLogging.ApplicationInsights", "SLAB_AI\SemanticLogging.ApplicationInsights.csproj", "{7EE56A78-9A8E-404F-B3F1-D07877D863E1}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -11,7 +11,7 @@ Global
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://almlatam.visualstudio.com/defaultcollection
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = SLAB_AI\\SLAB_AI.csproj
+		SccProjectUniqueName1 = SLAB_AI\\SemanticLogging.ApplicationInsights.csproj
 		SccProjectName1 = SLAB_AI
 		SccLocalPath1 = SLAB_AI
 	EndGlobalSection
