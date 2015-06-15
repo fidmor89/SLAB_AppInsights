@@ -1,5 +1,4 @@
 ﻿using System;
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -84,7 +83,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
             #region EventSchema Properties
             trace.Properties.Add("Event Name", value.Schema.EventName);
             if (value.Schema.KeywordsDescription != null)
-                trace.Properties.Add("Keywords", value.Schema.KeywordsDescription);
+            trace.Properties.Add("Keywords", value.Schema.KeywordsDescription);
             trace.Properties.Add("Operation Code Name", value.Schema.OpcodeName);
             trace.Properties.Add("Provider Id", value.Schema.ProviderId.ToString());
             trace.Properties.Add("Provider Name", value.Schema.ProviderName);
