@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AI_Integration.cs" />
     <Compile Include="ApplicationInsightsSink.cs" />
     <Compile Include="ApplicationInsightsSinkExtensions.cs" />
     <Compile Include="LogEventLevelExtensions.cs" />
