@@ -24,11 +24,23 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class with the specified Instrumentation Key and the optional contextInitialiazers.
         /// </summary>
+        /// exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
+        /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
         /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
         /// <param name="contextInitializers">The (optional) Application Insights context initializers.</param>
         public ApplicationInsightsSink(String InstrumentationKey,params IContextInitializer[] contextInitializers)
         {
             telemetryClient = new TelemetryClient();
+            if (InstrumentationKey == null)
+            {
+                throw new ArgumentNullException("Instrumentation Key");
+            }
+
+            if (InstrumentationKey.Length == 0)
+            {
+                throw new ArgumentException("The Instrumentation Key is empty", "Instrumentation Key");
+            }
+
             TelemetryConfiguration.Active.InstrumentationKey = InstrumentationKey;
 
             if (contextInitializers != null)
