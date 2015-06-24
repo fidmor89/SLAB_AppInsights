@@ -31,7 +31,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
                 case EventLevel.Critical:
                     return SeverityLevel.Critical;
                 case EventLevel.LogAlways:
-                    return SeverityLevel.Critical; 
+                    return SeverityLevel.Critical;
                 default:
                     throw new ArgumentOutOfRangeException("EventLevel", logEventLevel, "The EventLevel is not recognized or out of range.");
             }
