@@ -21,6 +21,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// TelemetryClient used for sending logs to Application Insights
         /// </summary>
         private TelemetryClient telemetryClient;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class with the specified Instrumentation Key and the optional contextInitialiazers.
         /// </summary>
@@ -28,7 +29,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
         /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
         /// <param name="contextInitializers">The (optional) Application Insights context initializers.</param>
-        public ApplicationInsightsSink(String InstrumentationKey,params IContextInitializer[] contextInitializers)
+        public ApplicationInsightsSink(String InstrumentationKey, params IContextInitializer[] contextInitializers)
         {
             telemetryClient = new TelemetryClient();
             if (InstrumentationKey == null)
@@ -58,7 +59,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// <param name="value">The current entry.</param>
         public void OnNext(EventEntry value)
         {
-            if (value != null) 
+            if (value != null)
             {
                 EventEntryToAITrace(value);
             }
@@ -71,6 +72,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         {
 
         }
+
         /// <summary>
         /// Notifies the observer that the provider has experienced an error condition.
         /// </summary>
@@ -79,6 +81,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         {
 
         }
+
         /// <summary>
         /// Gets the SLAB log and convert to ApplicationInsights TraceTelemetry
         /// </summary>
@@ -88,14 +91,18 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
             int i; // iterator
             TraceTelemetry trace = new TraceTelemetry();
             if (!String.IsNullOrEmpty(value.FormattedMessage))
+            {
                 trace.Message = value.FormattedMessage;
+            }
             trace.SeverityLevel = LogEventLevelExtensions.ToSeverityLevel(value.Schema.Level);
             trace.Timestamp = value.Timestamp;
 
             #region EventSchema Properties
             trace.Properties.Add("Event Name", value.Schema.EventName);
             if (value.Schema.KeywordsDescription != null)
-            trace.Properties.Add("Keywords", value.Schema.KeywordsDescription);
+            {
+                trace.Properties.Add("Keywords", value.Schema.KeywordsDescription);
+            }
             trace.Properties.Add("Operation Code Name", value.Schema.OpcodeName);
             trace.Properties.Add("Provider Id", value.Schema.ProviderId.ToString());
             trace.Properties.Add("Provider Name", value.Schema.ProviderName);
@@ -121,10 +128,9 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
             trace.Properties.Add("Process Id", value.ProcessId.ToString());
             trace.Properties.Add("Thread Id", value.ThreadId.ToString());
             #endregion EventValue Properties
-            //call the TrackTrace method to send the log to Application Insights
-            telemetryClient.TrackTrace(trace);
-            // flush the telemetry
-            telemetryClient.Flush();
+
+            telemetryClient.TrackTrace(trace);                                          //call the TrackTrace method to send the log to Application Insights
+            telemetryClient.Flush();                                                    // flush the telemetry
         }
     }
 }
