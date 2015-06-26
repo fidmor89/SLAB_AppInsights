@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.ApplicationInsights.DataContracts;
 namespace SLABAI
 {
     public partial class Form1 : Form
@@ -19,7 +20,9 @@ namespace SLABAI
             var listener1 = new ObservableEventListener();
 
             listener1.EnableEvents(MyCompanyEventSource.Log, EventLevel.LogAlways, Keywords.All);
-            listener1.LogToApplicationInsights("c9ce96c4-8be1-4368-87d4-1dedd72aaa71");
+            OsVersionContextInitializer os = new OsVersionContextInitializer("Windows 8.1");
+            ApplicationVersionContextInitializer version = new ApplicationVersionContextInitializer("2.1");
+            listener1.LogToApplicationInsights("c9ce96c4-8be1-4368-87d4-1dedd72aaa71",os,version);
             MyCompanyEventSource.Log.Startup();
 
         }
