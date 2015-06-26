@@ -11,10 +11,10 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
     internal static class LogEventLevelExtensions
     {
         /// <summary>
-        /// Converts the Event level to the severity level.
+        ///Converts an Event level object of Semantic Logging Application Block to a severity level object of Application Insights.
         /// </summary>
         /// <param name="logEventLevel">The log event level.</param>
-        /// <returns>The severity level associated to that Event level</returns>
+        /// <returns>The severity level associated to that Event level object</returns>
         /// <exception cref="System.ArgumentOutOfRangeException">The EventLevel is out of range</exception>
         public static SeverityLevel ToSeverityLevel(this EventLevel logEventLevel)
         {
