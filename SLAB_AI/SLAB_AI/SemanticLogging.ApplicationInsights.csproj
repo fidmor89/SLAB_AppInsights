@@ -54,8 +54,10 @@
   <ItemGroup>
     <Compile Include="Sinks\ApplicationInsightsSink.cs" />
     <Compile Include="ApplicationInsightsSinkExtensions.cs" />
+    <Compile Include="Utility\ApplicationVersionContextInitializer.cs" />
     <Compile Include="Utility\LogEventLevelExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\OsVersionContextInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
