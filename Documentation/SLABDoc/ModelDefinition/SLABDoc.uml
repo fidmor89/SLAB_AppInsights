@@ -1,0 +1,804 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel"
+  dslVersion="1.0.0.0"
+  Id="8032792e-de35-4a6d-aaeb-3f1855b73c5b"
+  name="SLABDoc" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <actor
+        Id="a95f3337-0abe-4b07-bc94-abb43fe10f89"
+        name="Application."
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="31b7e5b8-2956-4a6c-8296-cdf54f7f9aa4"
+            isDerived="false"
+            sourceEndRoleName="Aplicación"
+            targetEndRoleName="UseCase1"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="6730cb59-f122-4157-955a-5c5c05dbc575"
+              LastKnownName="Crea un escuchador de eventos."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8fe48184-3a56-4beb-b646-5009d3f75a48"
+                  name="Aplicación"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="effe4516-bf2f-4d66-8dd6-4fe4bd2dec5f"
+                  name="UseCase1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="1f0968e6-5f47-48b7-aaa5-dc2656be9cf6"
+            isDerived="false"
+            sourceEndRoleName="Aplicación"
+            targetEndRoleName="UseCase2"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="204e3a4c-5641-480f-aa97-ece025f49fd2"
+              LastKnownName="Se "
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c64d1aa6-ea36-4fe9-bb46-178b24e27b81"
+                  name="Aplicación"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1fdcc649-991a-49d4-b650-44387618fa20"
+                  name="UseCase2"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="b9f00854-eb9e-4f7c-b44e-e77ec0eadc69"
+            isDerived="false"
+            sourceEndRoleName="Aplicación"
+            targetEndRoleName="Crea un escuchador de eventos."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="f5d1f9bd-af04-47ed-8441-f946f65bc6a4"
+              LastKnownName="Create an ObservableEventListener()."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bc288e13-6cc5-4bd6-9b96-f8a2115ce5de"
+                  name="Aplicación"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1500f86b-dfb3-48f6-9b3b-ede298983e61"
+                  name="Crea un escuchador de eventos."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="6730cb59-f122-4157-955a-5c5c05dbc575"
+        name="Crea un escuchador de eventos."
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="9954dde7-fc01-4337-bf7d-0b4b04e19c01"
+            isDerived="false"
+            sourceEndRoleName="Se Crea un escuchador de eventos."
+            targetEndRoleName="Se indica a través de un metodo la instrumentation key."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="480d45d4-397a-404a-a8e5-241c2db40b67"
+              LastKnownName="Se indica a través de &quot;LogToApplicationInsights&quot; la instrumentation key."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bc2707ff-7f73-4fac-ad70-6c30b0fd4636"
+                  name="Se Crea un escuchador de eventos."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="70dfb6d3-e894-42c6-8d38-d8f60b7a7d31"
+                  name="Se indica a través de un metodo la instrumentation key."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="c8377981-c1d1-4914-a572-c17db67db8fc"
+            isDerived="false"
+            sourceEndRoleName="Se Crea un escuchador de eventos."
+            targetEndRoleName="Se habilitan los eventos del escuchador indicando la clase EventSource a utilizar."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="8817331d-abbe-4175-909c-1500582bd43e"
+              LastKnownName="Se habilitan los eventos del escuchador indicando la clase EventSource a utilizar, el nivel del evento y la propiedad de keywords."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="62821537-ba49-4b63-808f-43fd7e95ca59"
+                  name="Se Crea un escuchador de eventos."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="089e2324-9fd4-440e-ae75-d1e56dd690b6"
+                  name="Se habilitan los eventos del escuchador indicando la clase EventSource a utilizar."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="1a704cfc-a5ce-4967-9a6f-a624c8b5a5ac"
+        name="IObserver"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="bbe4e7c0-a81c-4bed-a52a-dbfe60c911f4">
+            <useCaseMoniker
+              Id="6730cb59-f122-4157-955a-5c5c05dbc575"
+              LastKnownName="Crea un escuchador de eventos."
+              LastKnownLocation="SLABDoc.uml" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="204e3a4c-5641-480f-aa97-ece025f49fd2"
+        name="Se "
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="480d45d4-397a-404a-a8e5-241c2db40b67"
+        name="Se indica a través de &quot;LogToApplicationInsights&quot; la instrumentation key."
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="e580dbe0-92dd-47e9-b0f7-a012adc62ab7"
+            isDerived="false"
+            sourceEndRoleName="Se indica a través de un metodo la instrumentation key."
+            targetEndRoleName="Se verifica que la IK sea valida."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="47045783-dd63-4b04-89f5-dbe64492cc3a"
+              LastKnownName="Se verifica que la IK sea válida."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="71853e7d-5dc3-45b2-91cd-09c9d4b795f2"
+                  name="Se indica a través de un metodo la instrumentation key."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="75bccfe1-8b71-45f1-8bd3-774b6b2fadb9"
+                  name="Se verifica que la IK sea valida."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="8817331d-abbe-4175-909c-1500582bd43e"
+        name="Se habilitan los eventos del escuchador indicando la clase EventSource a utilizar, el nivel del evento y la propiedad de keywords."
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="47045783-dd63-4b04-89f5-dbe64492cc3a"
+        name="Se verifica que la IK sea válida."
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="2da131a7-61db-43af-8d4c-6c06ba0a09d0"
+        name="Se verifica que el contexto no sea nulo y se convierte el Log a un AppInsights TraceTelemetry."
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="3b54653d-bd3b-4190-b6c5-5f1072236589"
+        name="AppInsightsSink."
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="ad8f11d5-ba61-4083-916a-219d2ad0f093"
+        name="Verifies that the context is not null."
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="7c772640-694f-4c86-83c7-9ef669bc9c8e"
+            isDerived="false"
+            sourceEndRoleName="Verifies that the context is not null."
+            targetEndRoleName="The Log is converted into an AppInsights TraceTelemetry."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="610617c7-cb2b-42b0-b2ab-6427a95d6cdb"
+              LastKnownName="The Log is converted into an AppInsights TraceTelemetry."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2c97a4dd-2d67-42a8-acf5-6f951298dce5"
+                  name="Verifies that the context is not null."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0658c37c-1034-4ae6-ad24-a6879b759c93"
+                  name="The Log is converted into an AppInsights TraceTelemetry."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <subjects>
+          <subsystemMoniker
+            Id="3b54653d-bd3b-4190-b6c5-5f1072236589"
+            LastKnownName="AppInsightsSink."
+            LastKnownLocation="SLABDoc.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="09e1845b-2360-455b-8166-df2f006d5ceb"
+        name="Verifies that the IK is valid."
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="c216659c-b2a1-4887-a938-acc15ea4b23b"
+            isDerived="false"
+            sourceEndRoleName="Verifies that the IK is valid."
+            targetEndRoleName="The Log is converted into an AppInsights TraceTelemetry."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="610617c7-cb2b-42b0-b2ab-6427a95d6cdb"
+              LastKnownName="The Log is converted into an AppInsights TraceTelemetry."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cfbca096-0f44-4e3e-b7e2-4436d0ea6a2b"
+                  name="Verifies that the IK is valid."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0094bb30-471a-4641-ba2a-dfca1657ce0d"
+                  name="The Log is converted into an AppInsights TraceTelemetry."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <subjects>
+          <subsystemMoniker
+            Id="3b54653d-bd3b-4190-b6c5-5f1072236589"
+            LastKnownName="AppInsightsSink."
+            LastKnownLocation="SLABDoc.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="88136c79-ea8f-46af-a534-46d305da9ced"
+        name="The instrumentation Key is indicated in the &quot;LogToApplicationInsights&quot; method."
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="d73b7765-3615-4f94-a05b-a6feb97f7fd0"
+            isDerived="false"
+            sourceEndRoleName="Se indica a través de un metodo la instrumentation key."
+            targetEndRoleName="Se verifica que la IK sea valida."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="09e1845b-2360-455b-8166-df2f006d5ceb"
+              LastKnownName="Verifies that the IK is valid."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a127beaa-6b68-436b-937e-f213b999a68f"
+                  name="Se indica a través de un metodo la instrumentation key."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b602445e-4662-45be-a28b-4d869140a207"
+                  name="Se verifica que la IK sea valida."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="8232cd7a-4738-4de9-b7d0-46ed50dfa0d4"
+            isDerived="false"
+            sourceEndRoleName="Se indica a través de &quot;LogToApplicationInsights&quot; la instrumentation key.1"
+            targetEndRoleName="Se verifica que el contexto no sea nulo y se convierte el Log a un AppInsights TraceTelemetry."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="ad8f11d5-ba61-4083-916a-219d2ad0f093"
+              LastKnownName="Verifies that the context is not null."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1d04c5ab-536e-4885-b042-27da5cbf5406"
+                  name="Se indica a través de &quot;LogToApplicationInsights&quot; la instrumentation key.1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="293bc1bb-64fa-4a27-b3fc-8cb5a83950ac"
+                  name="Se verifica que el contexto no sea nulo y se convierte el Log a un AppInsights TraceTelemetry."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <subjects>
+          <subsystemMoniker
+            Id="3b54653d-bd3b-4190-b6c5-5f1072236589"
+            LastKnownName="AppInsightsSink."
+            LastKnownLocation="SLABDoc.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c9e891a5-1fff-41d0-93be-e7110e0ec93c"
+        name="The EventSource class, the Event Level and the Keywords properties are indicated in the &quot;EnableEvents&quot; method."
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="51cf6a88-b00b-4409-b2df-cc46505bc99a"
+            isDerived="false"
+            sourceEndRoleName="Se habilitan los eventos del escuchador indicando la clase EventSource a utilizar, el nivel del evento y la propiedad de keywords."
+            targetEndRoleName="El Log es envíado a Application Insights."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="d329258c-989b-40d7-a34f-ac5913e8ecb0"
+              LastKnownName="Log is sent to application insights."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="dd53d0b7-aea2-4616-9d6e-fd62879e06d0"
+                  name="Se habilitan los eventos del escuchador indicando la clase EventSource a utilizar, el nivel del evento y la propiedad de keywords."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7d582c7a-7a2f-45a4-92cd-0c76b37fff45"
+                  name="El Log es envíado a Application Insights."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <subjects>
+          <subsystemMoniker
+            Id="3b54653d-bd3b-4190-b6c5-5f1072236589"
+            LastKnownName="AppInsightsSink."
+            LastKnownLocation="SLABDoc.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="f5d1f9bd-af04-47ed-8441-f946f65bc6a4"
+        name="Create an ObservableEventListener()."
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="a2b46b22-6cc1-44e0-b8e8-43734ff575d7"
+            isDerived="false"
+            sourceEndRoleName="Se Crea un escuchador de eventos."
+            targetEndRoleName="Se indica a través de un metodo la instrumentation key."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="88136c79-ea8f-46af-a534-46d305da9ced"
+              LastKnownName="The instrumentation Key is indicated in the &quot;LogToApplicationInsights&quot; method."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="dd1e7150-2e97-41ba-a585-6035f8874065"
+                  name="Se Crea un escuchador de eventos."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f4bebf2d-1ec4-4e9d-ba65-b0623b7aff6e"
+                  name="Se indica a través de un metodo la instrumentation key."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="2d635c2d-a37d-4a17-923b-d00cc0c18729"
+            isDerived="false"
+            sourceEndRoleName="Se Crea un escuchador de eventos."
+            targetEndRoleName="Se habilitan los eventos del escuchador indicando la clase EventSource a utilizar."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="c9e891a5-1fff-41d0-93be-e7110e0ec93c"
+              LastKnownName="The EventSource class, the Event Level and the Keywords properties are indicated in the &quot;EnableEvents&quot; method."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1aeabe4f-1e22-4627-962b-0bd0412dcf95"
+                  name="Se Crea un escuchador de eventos."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7625f401-cdb9-466c-9a13-ea563865d6dc"
+                  name="Se habilitan los eventos del escuchador indicando la clase EventSource a utilizar."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <subjects>
+          <subsystemMoniker
+            Id="3b54653d-bd3b-4190-b6c5-5f1072236589"
+            LastKnownName="AppInsightsSink."
+            LastKnownLocation="SLABDoc.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="7d73c44a-1c34-4e56-9ae3-d4991664005e"
+        name="IObserver"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="d3d0e096-e0d1-457d-b184-d2cc34ab88d5">
+            <useCaseMoniker
+              Id="f5d1f9bd-af04-47ed-8441-f946f65bc6a4"
+              LastKnownName="Create an ObservableEventListener()."
+              LastKnownLocation="SLABDoc.uml" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker
+            Id="3b54653d-bd3b-4190-b6c5-5f1072236589"
+            LastKnownName="AppInsightsSink."
+            LastKnownLocation="SLABDoc.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d329258c-989b-40d7-a34f-ac5913e8ecb0"
+        name="Log is sent to application insights."
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="3b54653d-bd3b-4190-b6c5-5f1072236589"
+            LastKnownName="AppInsightsSink."
+            LastKnownLocation="SLABDoc.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="610617c7-cb2b-42b0-b2ab-6427a95d6cdb"
+        name="The Log is converted into an AppInsights TraceTelemetry."
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="0fcef045-a5c8-46a3-b2ef-8eb9d05e845c"
+            isDerived="false"
+            sourceEndRoleName="The Log is converted into an AppInsights TraceTelemetry."
+            targetEndRoleName="Log is sent to application insights."
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="d329258c-989b-40d7-a34f-ac5913e8ecb0"
+              LastKnownName="Log is sent to application insights."
+              LastKnownLocation="SLABDoc.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f69857f5-ff17-4fef-93ec-653c503090af"
+                  name="The Log is converted into an AppInsights TraceTelemetry."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4e0a7031-11a1-4a40-9dff-659341d572ee"
+                  name="Log is sent to application insights."
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <subjects>
+          <subsystemMoniker
+            Id="3b54653d-bd3b-4190-b6c5-5f1072236589"
+            LastKnownName="AppInsightsSink."
+            LastKnownLocation="SLABDoc.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>
