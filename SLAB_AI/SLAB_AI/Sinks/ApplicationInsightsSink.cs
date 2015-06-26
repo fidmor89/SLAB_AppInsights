@@ -25,7 +25,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class with the specified Instrumentation Key and the optional contextInitialiazers.
         /// </summary>
-        /// exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
         /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
         /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
         /// <param name="contextInitializers">The (optional) Application Insights context initializers.</param>
@@ -83,7 +83,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         }
 
         /// <summary>
-        /// Gets the SLAB log and convert to ApplicationInsights TraceTelemetry
+        /// Gets the Semantic Logging Application Block log and convert it to Application Insights TraceTelemetry
         /// </summary>
         /// <param name="value">The current entry.</param>
         private void EventEntryToAITrace(EventEntry value)
@@ -121,7 +121,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
                 i = 0;
                 foreach (object o in value.Payload)
                 {
-                    trace.Properties.Add(value.Schema.Payload[i], o.ToString());
+                    trace.Properties.Add("Payload "+ value.Schema.Payload[i], o.ToString());
                     i++;
                 }
             }
@@ -133,4 +133,5 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
             telemetryClient.Flush();                                                    // flush the telemetry
         }
     }
+
 }
