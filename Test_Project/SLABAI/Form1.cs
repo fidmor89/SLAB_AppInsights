@@ -37,30 +37,7 @@ namespace SLABAI
             int random;
             Random r = new Random();
             random = r.Next(1, 6);
-            this.RandomLog(random);
-        }
-        private void RandomLog(int Random)
-        {
-            switch(Random)
-            {
-                case 1:
-                    ApplicationInsightsEventSource.Log.Log1();
-                    break;
-                case 2:
-                    ApplicationInsightsEventSource.Log.Log2();
-                    break;
-                case 3:
-                    ApplicationInsightsEventSource.Log.Log3();
-                    break;
-                case 4:
-                    ApplicationInsightsEventSource.Log.Log4();
-                    break;
-                case 5:
-                    ApplicationInsightsEventSource.Log.Log5();
-                    break;
-                default :
-                    break;
-            }
+            ApplicationInsightsEventSource.Log.LogRandom(random);
         }
         public void AddData(String Message,String Severity,String TimeStamp)
         {
