@@ -30,7 +30,6 @@ namespace SLABAI
             listener1.LogToApplicationInsights("c9ce96c4-8be1-4368-87d4-1dedd72aaa71",os,version);
             listener2.LogToWindowsForm(this);
             ApplicationInsightsEventSource.Log.Startup();
-
         }
 
         private void button1_Click(object sender, EventArgs e)

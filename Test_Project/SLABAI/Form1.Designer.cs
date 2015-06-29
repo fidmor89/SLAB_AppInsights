@@ -41,7 +41,7 @@
             // 
             // bSLAB
             // 
-            this.bSLAB.Image = ((System.Drawing.Image)(resources.GetObject("bSLAB.Image")));
+            this.bSLAB.Image = global::SLABAI.Properties.Resources.Unity_2_0;
             this.bSLAB.Location = new System.Drawing.Point(277, 207);
             this.bSLAB.Name = "bSLAB";
             this.bSLAB.Size = new System.Drawing.Size(105, 100);
