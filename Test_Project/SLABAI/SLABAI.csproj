@@ -104,6 +104,7 @@
   <ItemGroup>
     <Content Include="Images\Unity.2.0.png" />
     <Content Include="Images\Unity.ico" />
+    <None Include="Resources\windows_azure.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

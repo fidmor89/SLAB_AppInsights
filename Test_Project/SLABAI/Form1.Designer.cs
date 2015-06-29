@@ -42,7 +42,7 @@
             // bSLAB
             // 
             this.bSLAB.Image = global::SLABAI.Properties.Resources.Unity_2_0;
-            this.bSLAB.Location = new System.Drawing.Point(277, 207);
+            this.bSLAB.Location = new System.Drawing.Point(442, 196);
             this.bSLAB.Name = "bSLAB";
             this.bSLAB.Size = new System.Drawing.Size(105, 100);
             this.bSLAB.TabIndex = 0;
@@ -58,7 +58,7 @@
             this.Message,
             this.SeverityLevel,
             this.EventTime});
-            this.dgvLogs.Location = new System.Drawing.Point(12, 37);
+            this.dgvLogs.Location = new System.Drawing.Point(19, 12);
             this.dgvLogs.Name = "dgvLogs";
             this.dgvLogs.Size = new System.Drawing.Size(613, 150);
             this.dgvLogs.TabIndex = 1;
@@ -89,7 +89,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 329);
+            this.BackgroundImage = global::SLABAI.Properties.Resources.windows_azure;
+            this.ClientSize = new System.Drawing.Size(644, 329);
             this.Controls.Add(this.dgvLogs);
             this.Controls.Add(this.bSLAB);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
