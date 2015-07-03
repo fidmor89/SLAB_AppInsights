@@ -5,12 +5,16 @@ The purpose of this project is to integrate Semantic Logging with Application In
 
 
 ## Contributors ##
-  - Fidel Esteban Morales Cifuentes
-  - Luis Roberto Rosales Enriquez
-  - Jose Luis Morales Ruiz
-  - Jose Carlos Mendez
-  - Jorge Andres Rodriguez Cuevas
-  - Herberth Francisco Arriola 
+  - Fidel Esteban Morales Cifuentes <a href='https://github.com/fidmor89'>GitHub Account</a>.
+  - Luis Roberto Rosales Enriquez <a href='https://github.com/chirislash'>GitHub Account</a>.
+  - Jose Luis Morales Ruiz <a href='https://github.com/chepix10'>GitHub Account</a>.
+  - Jose Carlos Mendez <a href='https://github.com/josemen'>GitHub Account</a>.
+  - Jorge Andres Rodriguez Cuevas <a href='https://github.com/jarodriguez08'>GitHub Account</a>.
+  - Herberth Francisco Arriola <a href='https://github.com/herbertharriola'>GitHub Account</a>.
+  
+
+Special Thanks to 
+Andrew Oakley for all his help with this project.
 
 
 Tags: Application Insights Semantic Logging Nuget
