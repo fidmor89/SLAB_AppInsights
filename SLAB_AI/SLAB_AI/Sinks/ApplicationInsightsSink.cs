@@ -130,7 +130,14 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
             #endregion EventValue Properties
 
             telemetryClient.TrackTrace(trace);                                          //call the TrackTrace method to send the log to Application Insights
-            telemetryClient.Flush();                                                    // flush the telemetry
+        }
+
+        /// <summary>
+        /// Flushes the in-memory buffer from the TelemetryClient used for sending logs to Application Insigths service.
+        /// </summary>
+        public void Flush()
+        {
+            telemetryClient.Flush();
         }
     }
 
