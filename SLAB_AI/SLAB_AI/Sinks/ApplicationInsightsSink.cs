@@ -70,7 +70,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// </summary>
         public void OnCompleted()
         {
-
+            Console.WriteLine("Additional telemetry data will not be transmitted.");
         }
 
         /// <summary>
