@@ -5,9 +5,9 @@ using Microsoft.ApplicationInsights.Extensibility;
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility
 {
     /// <summary>
-    /// An <see cref="IContextInitializer"/> implementation that appends the <see cref="Environment.OSVersion"/> to an Application Insights <see cref="TelemetryContext"/>
+    /// An <see cref="ITelemetryInitializer"/> implementation that appends the applicationVersion to an Application Insights <see cref="ITelemetry.Context"/>
     /// </summary>
-    public class ApplicationVersionContextInitializer : IContextInitializer
+    public class ApplicationVersionContextInitializer : ITelemetryInitializer
     {
         /// <summary>
         /// Gets or sets the application version.
@@ -31,17 +31,18 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
         #region Implementation of IContextInitializer
 
         /// <summary>
-        /// Initializes the given <see cref="T:Microsoft.ApplicationInsights.DataContracts.TelemetryContext"/>.
+        /// Initializes the given <see cref="T:Microsoft.ApplicationInsights.Channel.ITelemetry"/>.
         /// </summary>
-        public void Initialize(TelemetryContext context)
+        public void Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry telemetry)
         {
-            if (context == null)
-                return;
-
-            if (string.IsNullOrWhiteSpace(context.Component.Version))
-                context.Component.Version = _applicationVersion;
+            if (telemetry != null && telemetry.Context != null)
+            {
+                if (String.IsNullOrWhiteSpace(telemetry.Context.Component.Version))
+                {
+                    telemetry.Context.Component.Version = _applicationVersion;
+                }
+            }
         }
-
         #endregion
     }
 }
