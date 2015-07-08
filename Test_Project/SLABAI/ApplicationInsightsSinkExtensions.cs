@@ -25,21 +25,5 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
             listener.LogToApplicationInsights(InstrumentationKey, contextInitializers);
             return listener;
         }
-        /// <summary>
-        /// Subscribes to an <see cref="IObservable{EventEntry}" /> using a <see cref="ApplicationInsightsSink" />.
-        /// </summary>
-        /// <param name="eventStream">The event stream. Typically this is an instance of <see cref="ObservableEventListener" />.</param>
-        /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
-        /// <param name="contextInitializers">The (optional) Application Insights context initializers.</param>
-        /// <returns>
-        /// A subscription to the sink that can be disposed to unsubscribe the sink and dispose it, or to get access to the sink instance.
-        /// </returns>
-        public static SinkSubscription<ApplicationInsightsSink> LogToApplicationInsights(this IObservable<EventEntry> eventStream,
-            String InstrumentationKey, params IContextInitializer[] contextInitializers)
-        {
-            var sink = new ApplicationInsightsSink(InstrumentationKey, contextInitializers);
-            var subscription = eventStream.Subscribe(sink);
-            return new SinkSubscription<ApplicationInsightsSink>(subscription, sink);
-        }
     }
 }
