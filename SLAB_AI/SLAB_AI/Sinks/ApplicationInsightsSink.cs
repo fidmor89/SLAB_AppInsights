@@ -131,14 +131,6 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 
             telemetryClient.TrackTrace(trace);                                          //call the TrackTrace method to send the log to Application Insights
         }
-
-        /// <summary>
-        /// Flushes the in-memory buffer from the TelemetryClient used for sending logs to Application Insigths service.
-        /// </summary>
-        public void Flush()
-        {
-            telemetryClient.Flush();
-        }
     }
 
 }
