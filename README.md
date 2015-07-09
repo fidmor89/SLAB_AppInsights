@@ -68,4 +68,6 @@ Or using Visual Studio:
 
   1.0.0 = Initial Version
   
-  1.0.1 = Minor fixes (latest version)
+  1.0.1 = Minor fixes 
+  
+  1.0.2 = Performance improvements (latest version)
