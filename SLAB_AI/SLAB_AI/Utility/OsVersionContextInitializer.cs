@@ -5,12 +5,12 @@ using Microsoft.ApplicationInsights.Extensibility;
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility
 {
     /// <summary>
-    /// An <see cref="IContextInitializer"/> implementation that appends the <see cref="Environment.OSVersion"/> to an Application Insights <see cref="TelemetryContext"/>
+    /// An <see cref="ITelemetryInitializer"/> implementation that appends the <see cref="Environment.OSVersion"/> to an Application Insights <see cref="ITelemetry.Context"/>
     /// </summary>
-    public class OsVersionContextInitializer : IContextInitializer
+    public class OsVersionContextInitializer : ITelemetryInitializer
     {
         /// <summary>
-        /// Builds the (lazy) Value for the .OperatingSystem property for the <see cref="TelemetryContext.Device"/> information.
+        /// Builds the (lazy) Value for the .OperatingSystem property for the <see cref="ITelemetry.Context.Device"/> information.
         /// </summary>
         private readonly Lazy<string> _osVersion;
 
@@ -27,20 +27,22 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
                 : osVersion);
         }
 
-        #region Implementation of IContextInitializer
+        #region Implementation of ITelemetryInitializer
 
         /// <summary>
-        /// Initializes the given <see cref="T:Microsoft.ApplicationInsights.DataContracts.TelemetryContext"/>.
+        /// Initializes the given <see cref="T:Microsoft.ApplicationInsights.Channel.ITelemetry"/>.
         /// </summary>
-        public void Initialize(TelemetryContext context)
+        public void Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry telemetry)
         {
-            if (context == null)
-                return;
-
-            if (string.IsNullOrWhiteSpace(context.Device.OperatingSystem))
-                context.Device.OperatingSystem = _osVersion.Value;
+            if (telemetry != null && telemetry.Context != null)
+            {
+                if (String.IsNullOrWhiteSpace(telemetry.Context.Device.OperatingSystem))
+                {
+                    telemetry.Context.Device.OperatingSystem = _osVersion.Value;
+                }
+            }
         }
-
+        
         #endregion
     }
 }
