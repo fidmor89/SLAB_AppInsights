@@ -52,7 +52,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
         public static SinkSubscription<ApplicationInsightsSink> LogToApplicationInsights(this IObservable<EventEntry> eventStream,
       String InstrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
         {
-            var sink = new ApplicationInsightsSink(telemetryInitializers);
+            var sink = new ApplicationInsightsSink(InstrumentationKey, telemetryInitializers);
             var subscription = eventStream.Subscribe(sink);
             return new SinkSubscription<ApplicationInsightsSink>(subscription, sink);
         }
