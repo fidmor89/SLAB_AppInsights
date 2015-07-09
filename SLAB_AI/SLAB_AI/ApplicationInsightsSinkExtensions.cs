@@ -15,14 +15,14 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
         /// Creates an event listener that logs using a <see cref="ApplicationInsightsSink" />.
         /// </summary>
         /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
-        /// <param name="contextInitializers">The (optional) Application Insights context initializers.</param>
+        /// <param name="TelemetryInitializer">The (optional) Application Insights telemetry initializers.</param>
         /// <returns>
         /// An event listener that uses <see cref="ApplicationInsightsSink" /> to log events.
         /// </returns>
-        public static EventListener CreateListener(String InstrumentationKey, params IContextInitializer[] contextInitializers)
+        public static EventListener CreateListener(String InstrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
         {
             var listener = new ObservableEventListener();
-            listener.LogToApplicationInsights(InstrumentationKey, contextInitializers);
+            listener.LogToApplicationInsights(InstrumentationKey, telemetryInitializers);
             return listener;
         }
 
@@ -31,14 +31,14 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
         /// </summary>
         /// <param name="eventStream">The event stream. Typically this is an instance of <see cref="ObservableEventListener" />.</param>
         /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
-        /// <param name="contextInitializers">The (optional) Application Insights context initializers.</param>
+        /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
         /// <returns>
         /// A subscription to the sink that can be disposed to unsubscribe the sink and dispose it, or to get access to the sink instance.
         /// </returns>
         public static SinkSubscription<ApplicationInsightsSink> LogToApplicationInsights(this IObservable<EventEntry> eventStream,
-      String InstrumentationKey, params IContextInitializer[] contextInitializers)
+      String InstrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
         {
-            var sink = new ApplicationInsightsSink(InstrumentationKey, contextInitializers);
+            var sink = new ApplicationInsightsSink(InstrumentationKey, telemetryInitializers);
             var subscription = eventStream.Subscribe(sink);
             return new SinkSubscription<ApplicationInsightsSink>(subscription, sink);
         }
