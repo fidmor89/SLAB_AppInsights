@@ -28,8 +28,8 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// <exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
         /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
         /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
-        /// <param name="contextInitializers">The (optional) Application Insights context initializers.</param>
-        public ApplicationInsightsSink(String InstrumentationKey, params IContextInitializer[] contextInitializers)
+        /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
+        public ApplicationInsightsSink(String InstrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
         {
             telemetryClient = new TelemetryClient();
             if (InstrumentationKey == null)
@@ -44,11 +44,11 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 
             TelemetryConfiguration.Active.InstrumentationKey = InstrumentationKey;
 
-            if (contextInitializers != null)
+            if (telemetryInitializers != null)
             {
-                foreach (var contextInitializer in contextInitializers)
+                foreach (var telemetryInitializer in telemetryInitializers)
                 {
-                    TelemetryConfiguration.Active.ContextInitializers.Add(contextInitializer);
+                    TelemetryConfiguration.Active.TelemetryInitializers.Add(telemetryInitializer);
                 }
             }
         }
