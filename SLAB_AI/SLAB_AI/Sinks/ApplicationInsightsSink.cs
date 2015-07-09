@@ -23,7 +23,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         private TelemetryClient telemetryClient;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class with the specified Instrumentation Key and the optional contextInitialiazers.
+        /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class with the specified Instrumentation Key and the optional telemetryInitialiazers.
         /// </summary>
         /// <exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
         /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
@@ -42,7 +42,35 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
                 throw new ArgumentException("The Instrumentation Key is empty", "Instrumentation Key");
             }
 
-            TelemetryConfiguration.Active.InstrumentationKey = InstrumentationKey;
+            telemetryClient.InstrumentationKey = InstrumentationKey;
+
+            if (telemetryInitializers != null)
+            {
+                foreach (var telemetryInitializer in telemetryInitializers)
+                {
+                    TelemetryConfiguration.Active.TelemetryInitializers.Add(telemetryInitializer);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class and uses the default Instrumentation Key In the config file.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
+        /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
+        /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
+        public ApplicationInsightsSink(params ITelemetryInitializer[] telemetryInitializers)
+        {
+            telemetryClient = new TelemetryClient();
+
+            if (String.IsNullOrWhiteSpace(TelemetryConfiguration.Active.InstrumentationKey))
+            {
+                throw new ArgumentNullException("Instrumentation Key");
+            }
+            if (TelemetryConfiguration.Active.InstrumentationKey.Length == 0)
+            {
+                throw new ArgumentException("The Instrumentation Key is empty", "Instrumentation Key");
+            }
 
             if (telemetryInitializers != null)
             {
