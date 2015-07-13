@@ -28,7 +28,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
             _applicationVersion = applicationVersion;
         }
 
-        #region Implementation of IContextInitializer
+        #region Implementation of ITelemetryInitializer
 
         /// <summary>
         /// Initializes the given <see cref="T:Microsoft.ApplicationInsights.Channel.ITelemetry"/>.
