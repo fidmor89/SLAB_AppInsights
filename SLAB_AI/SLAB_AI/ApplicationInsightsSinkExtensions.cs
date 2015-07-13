@@ -53,8 +53,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
       String InstrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
         {
             var sink = initializeSink(telemetryInitializers, InstrumentationKey);
-            var subscription = eventStream.Subscribe(sink);
-            return new SinkSubscription<ApplicationInsightsSink>(subscription, sink);
+            return subscribe(eventStream, sink);
         }
 
         /// <summary>
@@ -68,6 +67,11 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
         public static SinkSubscription<ApplicationInsightsSink> LogToApplicationInsights(this IObservable<EventEntry> eventStream, params ITelemetryInitializer[] telemetryInitializers)
         {
             var sink = initializeSink(telemetryInitializers);
+            return subscribe(eventStream, sink);
+        }
+
+        private static SinkSubscription<ApplicationInsightsSink> subscribe(IObservable<EventEntry> eventStream, ApplicationInsightsSink sink)
+        {
             var subscription = eventStream.Subscribe(sink);
             return new SinkSubscription<ApplicationInsightsSink>(subscription, sink);
         }
