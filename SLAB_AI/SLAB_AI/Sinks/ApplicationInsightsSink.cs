@@ -38,6 +38,14 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 
             addInitializers(telemetryInitializers);
         }
+        
+        /// <sumary>
+        /// Class destructor. Ensures all telemtry items are sent before object destruction.
+        /// This is done through a manual flush of the Telemetry Client object.
+        /// </sumary>
+        ~ApplicationInsightsSink() {
+            this.telemetryClient.Flush();
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class and uses the default Instrumentation Key In the config file.
@@ -164,6 +172,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 
             telemetryClient.TrackTrace(trace);                                          //call the TrackTrace method to send the log to Application Insights
         }
+        
     }
 
 }
