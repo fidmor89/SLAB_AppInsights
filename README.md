@@ -8,12 +8,12 @@ The purpose of this project is to integrate Semantic Logging with Application In
 
 
 ## Contributors ##
-  - Fidel Esteban Morales Cifuentes <a href='https://github.com/fidmor89'>GitHub Account</a>.
-  - Luis Roberto Rosales Enriquez <a href='https://github.com/chirislash'>GitHub Account</a>.
-  - Jose Luis Morales Ruiz <a href='https://github.com/chepix10'>GitHub Account</a>.
-  - Jose Carlos Mendez <a href='https://github.com/josemen'>GitHub Account</a>.
-  - Jorge Andres Rodriguez Cuevas <a href='https://github.com/jarodriguez08'>GitHub Account</a>.
-  - Herberth Francisco Arriola <a href='https://github.com/herbertharriola'>GitHub Account</a>.
+  - <a href='https://github.com/fidmor89'>Fidel Esteban Morales Cifuentes</a>.
+  - <a href='https://github.com/chirislash'>Luis Roberto Rosales Enriquez</a>.
+  - <a href='https://github.com/chepix10'>Jose Luis Morales Ruiz</a>.
+  - <a href='https://github.com/josemen'>Jose Carlos Mendez</a>.
+  - <a href='https://github.com/jarodriguez08'>Jorge Andres Rodriguez Cuevas</a>.
+  - <a href='https://github.com/herbertharriola'>Herberth Francisco Arriola</a>.
   
 
 Special Thanks to 
@@ -70,4 +70,7 @@ Or using Visual Studio:
   
   1.0.1 = Minor fixes 
   
-  1.0.2 = Performance improvements (latest version)
+  1.0.2 = Performance improvements 
+  
+  1.0.3 = Bug fixes (latest version)
+  
