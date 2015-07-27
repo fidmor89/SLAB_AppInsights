@@ -32,25 +32,19 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         public ApplicationInsightsSink(String InstrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
         {
             telemetryClient = new TelemetryClient();
-            if (InstrumentationKey == null)
-            {
-                throw new ArgumentNullException("Instrumentation Key");
-            }
-
-            if (InstrumentationKey.Length == 0)
-            {
-                throw new ArgumentException("The Instrumentation Key is empty", "Instrumentation Key");
-            }
+            checkIkey(InstrumentationKey);
 
             telemetryClient.InstrumentationKey = InstrumentationKey;
 
-            if (telemetryInitializers != null)
-            {
-                foreach (var telemetryInitializer in telemetryInitializers)
-                {
-                    TelemetryConfiguration.Active.TelemetryInitializers.Add(telemetryInitializer);
-                }
-            }
+            addInitializers(telemetryInitializers);
+        }
+        
+        /// <sumary>
+        /// Class destructor. Ensures all telemtry items are sent before object destruction.
+        /// This is done through a manual flush of the Telemetry Client object.
+        /// </sumary>
+        ~ApplicationInsightsSink() {
+            this.telemetryClient.Flush();
         }
 
         /// <summary>
@@ -62,22 +56,41 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         public ApplicationInsightsSink(params ITelemetryInitializer[] telemetryInitializers)
         {
             telemetryClient = new TelemetryClient();
+            checkIkey(TelemetryConfiguration.Active.InstrumentationKey);
 
-            if (String.IsNullOrWhiteSpace(TelemetryConfiguration.Active.InstrumentationKey))
-            {
-                throw new ArgumentNullException("Instrumentation Key");
-            }
-            if (TelemetryConfiguration.Active.InstrumentationKey.Length == 0)
-            {
-                throw new ArgumentException("The Instrumentation Key is empty", "Instrumentation Key");
-            }
+            addInitializers(telemetryInitializers);
+        }
 
+        /// <summary>
+        /// Helper method to add initializers into <see cref="TelemetryConfiguration.Active.TelemetryInitializers"/>
+        /// </summary>
+        /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
+        private static void addInitializers(ITelemetryInitializer[] telemetryInitializers)
+        {
             if (telemetryInitializers != null)
             {
                 foreach (var telemetryInitializer in telemetryInitializers)
                 {
                     TelemetryConfiguration.Active.TelemetryInitializers.Add(telemetryInitializer);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Method used to check if the iKey provided is not null, whitespace or empty.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
+        /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
+        /// <param name="iKey"></param>
+        private static void checkIkey(String iKey)
+        {
+            if (String.IsNullOrWhiteSpace(iKey))
+            {
+                throw new ArgumentNullException("Instrumentation Key");
+            }
+            if (iKey.Length == 0)
+            {
+                throw new ArgumentException("The Instrumentation Key is empty", "Instrumentation Key");
             }
         }
 
@@ -159,6 +172,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 
             telemetryClient.TrackTrace(trace);                                          //call the TrackTrace method to send the log to Application Insights
         }
+        
     }
 
 }

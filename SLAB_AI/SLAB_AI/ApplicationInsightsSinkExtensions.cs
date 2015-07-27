@@ -52,9 +52,8 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
         public static SinkSubscription<ApplicationInsightsSink> LogToApplicationInsights(this IObservable<EventEntry> eventStream,
       String InstrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
         {
-            var sink = new ApplicationInsightsSink(telemetryInitializers);
-            var subscription = eventStream.Subscribe(sink);
-            return new SinkSubscription<ApplicationInsightsSink>(subscription, sink);
+            var sink = initializeSink(telemetryInitializers, InstrumentationKey);
+            return subscribe(eventStream, sink);
         }
 
         /// <summary>
@@ -67,9 +66,22 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
         /// </returns>
         public static SinkSubscription<ApplicationInsightsSink> LogToApplicationInsights(this IObservable<EventEntry> eventStream, params ITelemetryInitializer[] telemetryInitializers)
         {
-            var sink = new ApplicationInsightsSink(telemetryInitializers);
+            var sink = initializeSink(telemetryInitializers);
+            return subscribe(eventStream, sink);
+        }
+
+        private static SinkSubscription<ApplicationInsightsSink> subscribe(IObservable<EventEntry> eventStream, ApplicationInsightsSink sink)
+        {
             var subscription = eventStream.Subscribe(sink);
             return new SinkSubscription<ApplicationInsightsSink>(subscription, sink);
+        }
+
+        private static ApplicationInsightsSink initializeSink(ITelemetryInitializer[] telemetryInitializers, String InstrumentationKey = null)
+        {
+            if (InstrumentationKey != null)
+                return new ApplicationInsightsSink(InstrumentationKey, telemetryInitializers);
+            else
+                return new ApplicationInsightsSink(telemetryInitializers);
         }
     }
 }
