@@ -162,7 +162,8 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
                 i = 0;
                 foreach (object o in value.Payload)
                 {
-                    trace.Properties.Add("Payload " + value.Schema.Payload[i], o.ToString());
+                    var payloadValue = o == null ? "null" : o.ToString();
+                    trace.Properties.Add("Payload " + value.Schema.Payload[i], payloadValue);
                     i++;
                 }
             }
