@@ -73,5 +73,8 @@ Or using Visual Studio:
   
   1.0.2 = Performance improvements 
   
-  1.0.3 = Bug fixes (latest version)
+  1.0.3 = Bug fixes 
+  
+  1.0.4 = Fix an issue when the payload value is null
+
   
