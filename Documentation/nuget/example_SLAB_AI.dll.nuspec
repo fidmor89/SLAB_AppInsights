@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>SLAB_AI</id>
+		<version>1.0.4-beta</version>
+		<title>SLAB Integration with Application Insights</title>
+		<authors>Fidel Esteban Morales Cifuentes, Luis Roberto Rosales Enriquez, Jose Luis Morales Ruis, Jose Carlos Mendez, Jorge Andres Rodriguez Cuevas, Herberth Arriola</authors>
+		<owners>Fidel Esteban Morales Cifuentes</owners>
+		<licenseUrl>http://www.gnu.org/licenses/gpl-3.0.html</licenseUrl>
+		<projectUrl>http://fidmor89.github.io/SLAB_AppInsights</projectUrl>
+		<requireLicenseAcceptance>true</requireLicenseAcceptance>
+		<description>This packages is intended for users of Semantic Login that want to seamlessly convert logs captured by SL and send them to Application Insights service on Azure</description>
+		<summary>The GNU General Public License is a free, copyleft license for software and other kinds of works.</summary>
+		<releaseNotes>Fix an issue when the payload value is null</releaseNotes>
+		<copyright>Copyright 2016</copyright>
+		<tags>Azure Application Insights AI SLAB SL Semantic Loggin Application Block</tags>
+		<dependencies>
+			<dependency id="Newtonsoft.Json" version="7.0.1" />
+			<dependency id="EnterpriseLibrary.SemanticLogging" version="2.0.1406.1" />
+			<dependency id="Microsoft.ApplicationInsights" version="0.17.1-beta" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="lib\SLAB_AI.dll" target="lib\SLAB_AI.dll" />
+	</files>
+</package>
