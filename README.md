@@ -65,6 +65,11 @@ Or using Visual Studio:
 
 
 
+## Contributing ##
+All kinds of contributions are welcomed, from posting issues to fixes and enhacements. Just fork it, make some changes and make a pull request. We won't take long to review your changes and merge it to master branch. Just keep in mind that generating the package and updating it on nuget.org migth take us a few days.
+
+
+
 ## Changelog ##
 
   1.0.0 = Initial Version
