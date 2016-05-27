@@ -1,0 +1,7 @@
+1. Get sources and build (dll)
+2. Download NuGet.exe from: https://docs.nuget.org/create/creating-and-publishing-a-package
+3. Generate default spec: nuget spec MyAssembly.dll
+4. Update nuspec data: (se example)
+5. nuget pack MyAssembly.nuspec
+6. nuget [setApiKey] [Your-API-Key]
+7. nuget push [YourPackage.nupkg] [Your-API-Key] -s https://www.nuget.org/packages/SLAB_AI/
