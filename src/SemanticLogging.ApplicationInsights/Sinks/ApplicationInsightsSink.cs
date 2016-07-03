@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.ApplicationInsights;
+﻿using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
-using System.Diagnostics.Eventing.Reader;
-using System.Diagnostics.Tracing;
-using System.Globalization;
-using System.Threading;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility;
+using System;
 
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 {
