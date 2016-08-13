@@ -1,6 +1,8 @@
 ﻿using System;
+using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.ApplicationInsights.Extensibility.Implementation;
 
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility
 {
@@ -10,7 +12,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
     public class OsVersionContextInitializer : ITelemetryInitializer
     {
         /// <summary>
-        /// Builds the (lazy) Value for the .OperatingSystem property for the <see cref="ITelemetry.Context.Device"/> information.
+        /// Lazily builds the value for the <see cref="DeviceContext.OperatingSystem"/> property for the <see cref="TelemetryContext.Device"/> property in <see cref="ITelemetry.Context"/>.
         /// </summary>
         private readonly Lazy<string> _osVersion;
 
@@ -23,7 +25,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
             _osVersion = new Lazy<string>(() => string.IsNullOrWhiteSpace(osVersion)
                 ? (Environment.OSVersion != null
                     ? Environment.OSVersion.ToString()
-                    : string.Empty)
+                    : String.Empty)
                 : osVersion);
         }
 
@@ -32,17 +34,14 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
         /// <summary>
         /// Initializes the given <see cref="T:Microsoft.ApplicationInsights.Channel.ITelemetry"/>.
         /// </summary>
-        public void Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry telemetry)
+        public void Initialize(ITelemetry telemetry)
         {
-            if (telemetry != null && telemetry.Context != null)
+            if (telemetry?.Context != null && String.IsNullOrWhiteSpace(telemetry.Context.Device.OperatingSystem))
             {
-                if (String.IsNullOrWhiteSpace(telemetry.Context.Device.OperatingSystem))
-                {
-                    telemetry.Context.Device.OperatingSystem = _osVersion.Value;
-                }
+                telemetry.Context.Device.OperatingSystem = _osVersion.Value;
             }
         }
-        
+
         #endregion
     }
 }

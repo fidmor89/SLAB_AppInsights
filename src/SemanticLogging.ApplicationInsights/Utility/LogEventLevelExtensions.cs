@@ -1,10 +1,6 @@
 ﻿using Microsoft.ApplicationInsights.DataContracts;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.Tracing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility
 {
@@ -33,7 +29,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
                 case EventLevel.LogAlways:
                     return SeverityLevel.Information;
                 default:
-                    throw new ArgumentOutOfRangeException("EventLevel", logEventLevel, "The EventLevel is not recognized or out of range.");
+                    throw new ArgumentOutOfRangeException(nameof(logEventLevel), logEventLevel, "The EventLevel is not recognized or out of range.");
             }
         }
 

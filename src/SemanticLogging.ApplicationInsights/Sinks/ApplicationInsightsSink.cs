@@ -3,40 +3,40 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility;
 using System;
+using System.Collections.Generic;
 
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 {
-
     public sealed class ApplicationInsightsSink : IObserver<EventEntry>
     {
         /// <summary>
         /// TelemetryClient used for sending logs to Application Insights
         /// </summary>
-        private TelemetryClient telemetryClient;
+        private readonly TelemetryClient _telemetryClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class with the specified Instrumentation Key and the optional telemetryInitialiazers.
         /// </summary>
         /// <exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
         /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
-        /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
+        /// <param name="instrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
         /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
-        public ApplicationInsightsSink(String InstrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
+        public ApplicationInsightsSink(string instrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
         {
-            telemetryClient = new TelemetryClient();
-            checkIkey(InstrumentationKey);
+            _telemetryClient = new TelemetryClient();
+            CheckInstrumentationkey(instrumentationKey);
 
-            telemetryClient.InstrumentationKey = InstrumentationKey;
+            _telemetryClient.InstrumentationKey = instrumentationKey;
 
-            addInitializers(telemetryInitializers);
+            AddInitializers(telemetryInitializers);
         }
         
         /// <sumary>
-        /// Class destructor. Ensures all telemtry items are sent before object destruction.
+        /// Class destructor. Ensures all telemetry items are sent before object destruction.
         /// This is done through a manual flush of the Telemetry Client object.
         /// </sumary>
         ~ApplicationInsightsSink() {
-            this.telemetryClient.Flush();
+            _telemetryClient.Flush();
         }
 
         /// <summary>
@@ -47,42 +47,39 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
         public ApplicationInsightsSink(params ITelemetryInitializer[] telemetryInitializers)
         {
-            telemetryClient = new TelemetryClient();
-            checkIkey(TelemetryConfiguration.Active.InstrumentationKey);
+            _telemetryClient = new TelemetryClient();
+            CheckInstrumentationkey(TelemetryConfiguration.Active.InstrumentationKey);
 
-            addInitializers(telemetryInitializers);
+            AddInitializers(telemetryInitializers);
         }
 
         /// <summary>
-        /// Helper method to add initializers into <see cref="TelemetryConfiguration.Active.TelemetryInitializers"/>
+        /// Helper method to add initializers into <see cref="TelemetryConfiguration.TelemetryInitializers"/> in <see cref="TelemetryConfiguration.Active"/>
         /// </summary>
         /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
-        private static void addInitializers(ITelemetryInitializer[] telemetryInitializers)
+        private static void AddInitializers(IEnumerable<ITelemetryInitializer> telemetryInitializers)
         {
-            if (telemetryInitializers != null)
+            foreach (var telemetryInitializer in telemetryInitializers)
             {
-                foreach (var telemetryInitializer in telemetryInitializers)
-                {
-                    TelemetryConfiguration.Active.TelemetryInitializers.Add(telemetryInitializer);
-                }
+                TelemetryConfiguration.Active.TelemetryInitializers.Add(telemetryInitializer);
             }
         }
 
         /// <summary>
-        /// Method used to check if the iKey provided is not null, whitespace or empty.
+        /// Method used to check if the instrumentation key provided is not null, whitespace or empty.
         /// </summary>
         /// <exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
         /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
-        /// <param name="iKey"></param>
-        private static void checkIkey(String iKey)
+        /// <param name="instrumentationKey"></param>
+        private static void CheckInstrumentationkey(string instrumentationKey)
         {
-            if (String.IsNullOrWhiteSpace(iKey))
+            if (String.IsNullOrWhiteSpace(instrumentationKey))
             {
-                throw new ArgumentNullException("Instrumentation Key");
+                throw new ArgumentNullException(nameof(instrumentationKey));
             }
-            if (iKey.Length == 0)
+            if (instrumentationKey.Length == 0)
             {
-                throw new ArgumentException("The Instrumentation Key is empty", "Instrumentation Key");
+                throw new ArgumentException("The Instrumentation Key is empty", nameof(instrumentationKey));
             }
         }
 
@@ -121,16 +118,14 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// <param name="value">The current entry.</param>
         private void EventEntryToAITrace(EventEntry value)
         {
-            int i; // iterator
-            TraceTelemetry trace = new TraceTelemetry();
+            var trace = new TraceTelemetry();
             if (!String.IsNullOrEmpty(value.FormattedMessage))
             {
                 trace.Message = value.FormattedMessage;
             }
-            trace.SeverityLevel = LogEventLevelExtensions.ToSeverityLevel(value.Schema.Level);
+            trace.SeverityLevel = value.Schema.Level.ToSeverityLevel();
             trace.Timestamp = value.Timestamp;
 
-            #region EventSchema Properties
             trace.Properties.Add("Event Name", value.Schema.EventName);
             if (value.Schema.KeywordsDescription != null)
             {
@@ -143,29 +138,22 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
             trace.Properties.Add("Task Name", value.Schema.TaskName);
             trace.Properties.Add("Event Version", value.Schema.Version.ToString());
 
-            #endregion EventSchema Properties
-
-            #region EventValue Properties
-
             trace.Properties.Add("Activity Id", value.ActivityId.ToString());
             trace.Properties.Add("Event Id", value.EventId.ToString());
             if (value.Payload != null)
             {
-                i = 0;
+                var i = 0; // iterator
                 foreach (object o in value.Payload)
                 {
-                    var payloadValue = o == null ? "null" : o.ToString();
+                    var payloadValue = o?.ToString() ?? "null";
                     trace.Properties.Add("Payload " + value.Schema.Payload[i], payloadValue);
                     i++;
                 }
             }
             trace.Properties.Add("Process Id", value.ProcessId.ToString());
             trace.Properties.Add("Thread Id", value.ThreadId.ToString());
-            #endregion EventValue Properties
 
-            telemetryClient.TrackTrace(trace);                                          //call the TrackTrace method to send the log to Application Insights
-        }
-        
+            _telemetryClient.TrackTrace(trace);
+        }   
     }
-
 }

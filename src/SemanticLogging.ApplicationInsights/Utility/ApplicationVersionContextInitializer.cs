@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.ApplicationInsights.DataContracts;
+using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.Extensibility;
 
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility
@@ -23,7 +23,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
         /// <param name="applicationVersion">The application version.</param>
         public ApplicationVersionContextInitializer(string applicationVersion)
         {
-            if (applicationVersion == null) throw new ArgumentNullException("applicationVersion");
+            if (applicationVersion == null) throw new ArgumentNullException(nameof(applicationVersion));
 
             _applicationVersion = applicationVersion;
         }
@@ -33,16 +33,14 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
         /// <summary>
         /// Initializes the given <see cref="T:Microsoft.ApplicationInsights.Channel.ITelemetry"/>.
         /// </summary>
-        public void Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry telemetry)
+        public void Initialize(ITelemetry telemetry)
         {
-            if (telemetry != null && telemetry.Context != null)
+            if (telemetry?.Context != null && String.IsNullOrWhiteSpace(telemetry.Context.Component.Version))
+
             {
-                if (String.IsNullOrWhiteSpace(telemetry.Context.Component.Version))
-                {
-                    telemetry.Context.Component.Version = _applicationVersion;
-                }
+                telemetry.Context.Component.Version = _applicationVersion;
             }
         }
+
         #endregion
-    }
-}
+    }}

@@ -10,22 +10,22 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
         /// <summary>
         /// Creates an event listener that logs using a <see cref="ApplicationInsightsSink" />.
         /// </summary>
-        /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
-        /// <param name="TelemetryInitializer">The (optional) Application Insights telemetry initializers.</param>
+        /// <param name="instrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
+        /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
         /// <returns>
         /// An event listener that uses <see cref="ApplicationInsightsSink" /> to log events.
         /// </returns>
-        public static EventListener CreateListener(String InstrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
+        public static EventListener CreateListener(string instrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
         {
             var listener = new ObservableEventListener();
-            listener.LogToApplicationInsights(InstrumentationKey, telemetryInitializers);
+            listener.LogToApplicationInsights(instrumentationKey, telemetryInitializers);
             return listener;
         }
 
         /// <summary>
         /// Creates an event listener that logs using a <see cref="ApplicationInsightsSink" />.
         /// </summary>
-        /// <param name="TelemetryInitializer">The (optional) Application Insights telemetry initializers.</param>
+        /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
         /// <returns>
         /// An event listener that uses <see cref="ApplicationInsightsSink" /> to log events.
         /// </returns>
@@ -40,16 +40,16 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
         /// Subscribes to an <see cref="IObservable{EventEntry}" /> using a <see cref="ApplicationInsightsSink" />.
         /// </summary>
         /// <param name="eventStream">The event stream. Typically this is an instance of <see cref="ObservableEventListener" />.</param>
-        /// <param name="InstrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
+        /// <param name="instrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
         /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
         /// <returns>
         /// A subscription to the sink that can be disposed to unsubscribe the sink and dispose it, or to get access to the sink instance.
         /// </returns>
         public static SinkSubscription<ApplicationInsightsSink> LogToApplicationInsights(this IObservable<EventEntry> eventStream,
-      String InstrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
+      String instrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
         {
-            var sink = initializeSink(telemetryInitializers, InstrumentationKey);
-            return subscribe(eventStream, sink);
+            var sink = InitializeSink(telemetryInitializers, instrumentationKey);
+            return Subscribe(eventStream, sink);
         }
 
         /// <summary>
@@ -62,22 +62,21 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
         /// </returns>
         public static SinkSubscription<ApplicationInsightsSink> LogToApplicationInsights(this IObservable<EventEntry> eventStream, params ITelemetryInitializer[] telemetryInitializers)
         {
-            var sink = initializeSink(telemetryInitializers);
-            return subscribe(eventStream, sink);
+            var sink = InitializeSink(telemetryInitializers);
+            return Subscribe(eventStream, sink);
         }
 
-        private static SinkSubscription<ApplicationInsightsSink> subscribe(IObservable<EventEntry> eventStream, ApplicationInsightsSink sink)
+        private static SinkSubscription<ApplicationInsightsSink> Subscribe(IObservable<EventEntry> eventStream, ApplicationInsightsSink sink)
         {
             var subscription = eventStream.Subscribe(sink);
             return new SinkSubscription<ApplicationInsightsSink>(subscription, sink);
         }
 
-        private static ApplicationInsightsSink initializeSink(ITelemetryInitializer[] telemetryInitializers, String InstrumentationKey = null)
+        private static ApplicationInsightsSink InitializeSink(ITelemetryInitializer[] telemetryInitializers, string instrumentationKey = null)
         {
-            if (InstrumentationKey != null)
-                return new ApplicationInsightsSink(InstrumentationKey, telemetryInitializers);
-            else
-                return new ApplicationInsightsSink(telemetryInitializers);
+            return instrumentationKey != null
+                ? new ApplicationInsightsSink(instrumentationKey, telemetryInitializers)
+                : new ApplicationInsightsSink(telemetryInitializers);
         }
     }
 }
