@@ -15,18 +15,18 @@ namespace Microsoft.ApplicationInsights.Extensibility
         /// <summary>
         /// Lazily builds the value for the <see cref="ComponentContext.Version"/> property of the <see cref="TelemetryContext.Component"/> property in <see cref="ITelemetry.Context"/>.
         /// </summary>
-        private readonly Lazy<string> _componentVersion;
+        private readonly Lazy<string> _applicationVersion;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationVersionContextInitializer" /> class.
         /// </summary>
-        /// <param name="componentVersion">The component version. If null, calculated from <see cref="Assembly.GetEntryAssembly"/>.</param>
-        public ApplicationVersionContextInitializer(string componentVersion = null)
+        /// <param name="applicationVersion">The application version. If null, calculated from <see cref="Assembly.GetEntryAssembly"/>.</param>
+        public ApplicationVersionContextInitializer(string applicationVersion = null)
         {
-            _componentVersion = new Lazy<string>(() =>
-                String.IsNullOrWhiteSpace(componentVersion)
+            _applicationVersion = new Lazy<string>(() =>
+                String.IsNullOrWhiteSpace(applicationVersion)
                     ? (Assembly.GetEntryAssembly()?.ToString() ?? Assembly.GetExecutingAssembly().ToString())
-                    : componentVersion);
+                    : applicationVersion);
         }
 
         #region Implementation of ITelemetryInitializer
@@ -38,7 +38,7 @@ namespace Microsoft.ApplicationInsights.Extensibility
         {
             if (String.IsNullOrWhiteSpace(telemetry.Context.Component.Version))
             {
-                telemetry.Context.Component.Version = _componentVersion.Value;
+                telemetry.Context.Component.Version = _applicationVersion.Value;
             }
         }
 
