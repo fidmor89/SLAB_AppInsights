@@ -8,7 +8,7 @@ using System.Globalization;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 {
-    public sealed class ApplicationInsightsSink : IObserver<EventEntry>, IDisposable
+    public sealed class ApplicationInsightsSink : IObserver<EventEntry>
     {
         /// <summary>
         /// TelemetryClient used for sending logs to Application Insights
@@ -62,41 +62,6 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
             Dispose(false);
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <sumary>
-        /// Ensures all telemetry items are sent before object destruction.
-        /// This is done by calling <see cref="TelemetryClient.Flush"/>.
-        /// </sumary>
-        private void Dispose(bool disposing)
-        {
-            if (_disposed)
-            {
-                return;
-            }
-
-            if (!disposing)
-            {
-                //we shouldn't reach here - sinks should be disposed of properly (typically by calling the associated SinkSubscription's Dispose method)
-                if (Debugger.IsAttached)
-                {
-                    Debugger.Break();
-                }
-                else
-                {
-                    _telemetryClient.TrackException(new InvalidOperationException($"{nameof(ApplicationInsightsSink)} was not disposed"));
-                }
-            }
-
-            _telemetryClient.Flush();
-
-            _disposed = true;
-        }
-
         /// <summary>
         /// Provides the sink with new data to write to Application Insights.
         /// </summary>
@@ -114,7 +79,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// </summary>
         public void OnCompleted()
         {
-            _telemetryClient.TrackEvent("SLAB-EndOfEventStream");
+            Dispose(true);
         }
 
         /// <summary>
@@ -123,7 +88,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// <param name="error">An object that provides additional information about the error.</param>
         public void OnError(Exception error)
         {
-            _telemetryClient.TrackException(error);
+            _telemetryClient.TrackException(new InvalidOperationException("ApplicationInsightsSink.OnError() called", error));
         }
 
         /// <summary>
@@ -169,6 +134,35 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
             }
 
             _telemetryClient.TrackEvent(eventTelemetry);
-        }   
+        }
+
+        /// <sumary>
+        /// Ensures all telemetry items are sent before object destruction.
+        /// This is done by calling <see cref="TelemetryClient.Flush"/>.
+        /// </sumary>
+        private void Dispose(bool completing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (!completing)
+            {
+                //we shouldn't reach here - it means ObservableEventListener.Dispose() wasn't called
+                if (Debugger.IsAttached)
+                {
+                    Debugger.Break();
+                }
+                else
+                {
+                    _telemetryClient.TrackException(new InvalidOperationException($"{nameof(ApplicationInsightsSink)} was not disposed"));
+                }
+            }
+
+            _telemetryClient.Flush();
+
+            _disposed = true;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace SemanticLogging.ApplicationInsights
     public static class ApplicationInsightsSinkExtensions
     {
         /// <summary>
-        /// Creates an event listener that logs using a <see cref="ApplicationInsightsSink" />.
+        /// Creates an event listener that logs using an <see cref="ApplicationInsightsSink" />.
         /// </summary>
         /// <param name="instrumentationKey">The ID that determines the application component under which your data appears in Application Insights.</param>
         /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
