@@ -1,9 +1,9 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
@@ -105,7 +105,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         {
             if (value != null)
             {
-                EventEntryToAITrace(value);
+                Track(value);
             }
         }
 
@@ -114,7 +114,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// </summary>
         public void OnCompleted()
         {
-            Console.WriteLine("Additional telemetry data will not be transmitted.");
+            _telemetryClient.TrackEvent("SLAB-EndOfEventStream");
         }
 
         /// <summary>
@@ -123,51 +123,52 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// <param name="error">An object that provides additional information about the error.</param>
         public void OnError(Exception error)
         {
-
+            _telemetryClient.TrackException(error);
         }
 
         /// <summary>
-        /// Gets the Semantic Logging Application Block log and convert it to Application Insights TraceTelemetry
+        /// Gets the Semantic Logging Application Block log and converts it to Application Insights TraceTelemetry
         /// </summary>
-        /// <param name="value">The current entry.</param>
-        private void EventEntryToAITrace(EventEntry value)
+        /// <param name="entry">The current event entry.</param>
+        private void Track(EventEntry entry)
         {
-            var trace = new TraceTelemetry();
-            if (!String.IsNullOrEmpty(value.FormattedMessage))
+            var eventTelemetry = new EventTelemetry
             {
-                trace.Message = value.FormattedMessage;
-            }
-            trace.SeverityLevel = value.Schema.Level.ToSeverityLevel();
-            trace.Timestamp = value.Timestamp;
+                Name = entry.Schema.EventName,
+                Timestamp = entry.Timestamp
+            };
 
-            trace.Properties.Add("Event Name", value.Schema.EventName);
-            if (value.Schema.KeywordsDescription != null)
-            {
-                trace.Properties.Add("Keywords", value.Schema.KeywordsDescription);
-            }
-            trace.Properties.Add("Operation Code Name", value.Schema.OpcodeName);
-            trace.Properties.Add("Provider Id", value.Schema.ProviderId.ToString());
-            trace.Properties.Add("Provider Name", value.Schema.ProviderName);
-            trace.Properties.Add("Task", value.Schema.Task.ToString());
-            trace.Properties.Add("Task Name", value.Schema.TaskName);
-            trace.Properties.Add("Event Version", value.Schema.Version.ToString());
+            eventTelemetry.Properties.Add("ProcessId", entry.ProcessId.ToString(CultureInfo.InvariantCulture));
+            eventTelemetry.Properties.Add("ThreadId", entry.ThreadId.ToString(CultureInfo.InvariantCulture));
+            eventTelemetry.Properties.Add("ActivityId", entry.ActivityId.ToString(null, CultureInfo.InvariantCulture));
+            eventTelemetry.Properties.Add("RelatedActivityId", entry.RelatedActivityId.ToString(null, CultureInfo.InvariantCulture));
+            eventTelemetry.Properties.Add("Level", entry.Schema.Level.ToString());
+            eventTelemetry.Properties.Add("EventId", entry.EventId.ToString(CultureInfo.InvariantCulture));
+            eventTelemetry.Properties.Add("Version", entry.Schema.Version.ToString(CultureInfo.InvariantCulture));
+            eventTelemetry.Properties.Add("Message", entry.FormattedMessage);
+            eventTelemetry.Properties.Add("Keywords", entry.Schema.KeywordsDescription);
+            eventTelemetry.Properties.Add("Task", entry.Schema.Task.ToString());
+            eventTelemetry.Properties.Add("TaskName", entry.Schema.TaskName);
+            eventTelemetry.Properties.Add("OpCode", entry.Schema.Opcode.ToString());
+            eventTelemetry.Properties.Add("OpCodeName", entry.Schema.OpcodeName);
+            eventTelemetry.Properties.Add("ProviderId", entry.ProviderId.ToString(null, CultureInfo.InvariantCulture));
+            eventTelemetry.Properties.Add("ProviderName", entry.Schema.ProviderName);
 
-            trace.Properties.Add("Activity Id", value.ActivityId.ToString());
-            trace.Properties.Add("Event Id", value.EventId.ToString());
-            if (value.Payload != null)
+            if (entry.Payload.Count != entry.Schema.Payload.Length)
             {
-                var i = 0; // iterator
-                foreach (object o in value.Payload)
+                var schema = entry.Schema.Payload == null ? "[Schema unspecified]" : String.Join(",", entry.Schema.Payload);
+                var payload = entry.Payload == null ? "[Payload unspecified]" : String.Join(",", entry.Payload);
+                eventTelemetry.Properties.Add("MismatchedPayload", $"Schema: {schema}; Payload: {payload}");
+            }
+            else
+            {
+                for (int i = 0; i < entry.Payload.Count; i++)
                 {
-                    var payloadValue = o?.ToString() ?? "null";
-                    trace.Properties.Add("Payload " + value.Schema.Payload[i], payloadValue);
-                    i++;
+                    eventTelemetry.Properties.Add($"Payload_{entry.Schema.Payload[i]}", entry.Payload[i]?.ToString());
                 }
             }
-            trace.Properties.Add("Process Id", value.ProcessId.ToString());
-            trace.Properties.Add("Thread Id", value.ThreadId.ToString());
 
-            _telemetryClient.TrackTrace(trace);
+            _telemetryClient.TrackEvent(eventTelemetry);
         }   
     }
 }
