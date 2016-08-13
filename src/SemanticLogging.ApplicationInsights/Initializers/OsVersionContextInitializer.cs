@@ -18,7 +18,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
         private readonly Lazy<string> _osVersion;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Object" /> class.
+        /// Initializes a new instance of the <see cref="OsVersionContextInitializer" /> class.
         /// </summary>
         /// <param name="osVersion">The os version.</param>
         public OsVersionContextInitializer(string osVersion = null)
