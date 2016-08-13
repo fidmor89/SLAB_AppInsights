@@ -7,6 +7,9 @@ using Microsoft.ApplicationInsights.Extensibility.Implementation;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.ApplicationInsights.Extensibility
 {
+    /// <summary>
+    /// An <see cref="ITelemetryInitializer"/> implementation that populates the <see cref="ComponentContext.Version"/> of an Application Insights <see cref="ITelemetry.Context"/>
+    /// </summary>
     public class ComponentVersionContextInitializer : ITelemetryInitializer
     {
         /// <summary>
@@ -17,9 +20,11 @@ namespace Microsoft.ApplicationInsights.Extensibility
         /// <summary>
         /// Initializes a new instance of the <see cref="ComponentVersionContextInitializer" /> class.
         /// </summary>
-        public ComponentVersionContextInitializer()
+        /// <param name="componentVersion">The component version. If null, calculated from <see cref="Assembly.GetEntryAssembly"/>.</param>
+        public ComponentVersionContextInitializer(string componentVersion = null)
         {
-            _componentVersion = new Lazy<string>(() => Assembly.GetEntryAssembly()?.ToString() ?? "Unknown");
+            _componentVersion = new Lazy<string>(() =>
+                String.IsNullOrWhiteSpace(componentVersion) ? (Assembly.GetEntryAssembly()?.ToString() ?? "Unknown") : componentVersion);
         }
 
         #region Implementation of ITelemetryInitializer
