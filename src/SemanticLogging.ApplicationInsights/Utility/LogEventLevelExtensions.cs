@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics.Tracing;
 
+// ReSharper disable once CheckNamespace
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility
 {
     internal static class LogEventLevelExtensions

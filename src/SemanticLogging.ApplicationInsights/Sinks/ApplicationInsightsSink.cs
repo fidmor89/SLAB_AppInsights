@@ -5,6 +5,7 @@ using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.
 using System;
 using System.Diagnostics;
 
+// ReSharper disable once CheckNamespace
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 {
     public sealed class ApplicationInsightsSink : IObserver<EventEntry>, IDisposable

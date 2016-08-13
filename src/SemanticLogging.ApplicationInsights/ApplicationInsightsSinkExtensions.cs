@@ -1,9 +1,10 @@
-﻿using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks;
-using System;
+﻿using System;
 using System.Diagnostics.Tracing;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
+using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks;
 
-namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
+namespace SemanticLogging.ApplicationInsights
 {
     public static class ApplicationInsightsSinkExtensions
     {
