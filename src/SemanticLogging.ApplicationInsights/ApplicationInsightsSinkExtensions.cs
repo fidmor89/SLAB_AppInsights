@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
 using Microsoft.ApplicationInsights.Extensibility;
-using Microsoft.Practices.EnterpriseLibrary.SemanticLogging;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks;
 
-namespace SemanticLogging.ApplicationInsights
+// ReSharper disable once CheckNamespace
+namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging
 {
     public static class ApplicationInsightsSinkExtensions
     {

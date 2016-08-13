@@ -121,9 +121,8 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 
             if (entry.Payload.Count != entry.Schema.Payload.Length)
             {
-                var schema = entry.Schema.Payload == null ? "[Schema unspecified]" : String.Join(",", entry.Schema.Payload);
-                var payload = entry.Payload == null ? "[Payload unspecified]" : String.Join(",", entry.Payload);
-                eventTelemetry.Properties.Add("MismatchedPayload", $"Schema: {schema}; Payload: {payload}");
+                eventTelemetry.Properties.Add("MismatchedPayloadSchema", 
+                    $"Schema: {String.Join(",", entry.Schema.Payload)}; Payload: {String.Join(",", entry.Payload)}");
             }
             else
             {

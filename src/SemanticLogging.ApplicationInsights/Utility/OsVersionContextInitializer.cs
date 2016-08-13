@@ -13,7 +13,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
     public class OsVersionContextInitializer : ITelemetryInitializer
     {
         /// <summary>
-        /// Lazily builds the value for the <see cref="DeviceContext.OperatingSystem"/> property for the <see cref="TelemetryContext.Device"/> property in <see cref="ITelemetry.Context"/>.
+        /// Lazily builds the value for the <see cref="DeviceContext.OperatingSystem"/> property of the <see cref="TelemetryContext.Device"/> property in <see cref="ITelemetry.Context"/>.
         /// </summary>
         private readonly Lazy<string> _osVersion;
 
