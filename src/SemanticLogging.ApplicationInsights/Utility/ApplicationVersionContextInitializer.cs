@@ -6,7 +6,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility
 {
     /// <summary>
-    /// An <see cref="ITelemetryInitializer"/> implementation that appends the applicationVersion to an Application Insights <see cref="ITelemetry.Context"/>
+    /// An <see cref="ITelemetryInitializer"/> implementation that appends the application's version to an Application Insights <see cref="ITelemetry.Context"/>
     /// </summary>
     public class ApplicationVersionContextInitializer : ITelemetryInitializer
     {
@@ -24,7 +24,14 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
         /// <param name="applicationVersion">The application version.</param>
         public ApplicationVersionContextInitializer(string applicationVersion)
         {
-            if (applicationVersion == null) throw new ArgumentNullException(nameof(applicationVersion));
+            if (applicationVersion == null)
+            {
+                throw new ArgumentNullException(nameof(applicationVersion));
+            }
+            if (String.IsNullOrWhiteSpace(applicationVersion))
+            {
+                throw new ArgumentException("Application version is empty or consists solely of whitespace characters", nameof(applicationVersion));
+            }
 
             _applicationVersion = applicationVersion;
         }
@@ -36,8 +43,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
         /// </summary>
         public void Initialize(ITelemetry telemetry)
         {
-            if (telemetry?.Context != null && String.IsNullOrWhiteSpace(telemetry.Context.Component.Version))
-
+            if (String.IsNullOrWhiteSpace(telemetry.Context.Component.Version))
             {
                 telemetry.Context.Component.Version = _applicationVersion;
             }
