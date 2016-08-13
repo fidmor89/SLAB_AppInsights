@@ -2,10 +2,10 @@
 using System.Reflection;
 using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.DataContracts;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights.Extensibility.Implementation;
 
-namespace SemanticLogging.ApplicationInsights.Initializers
+// ReSharper disable once CheckNamespace
+namespace Microsoft.ApplicationInsights.Extensibility
 {
     public class ComponentVersionContextInitializer : ITelemetryInitializer
     {
@@ -24,6 +24,9 @@ namespace SemanticLogging.ApplicationInsights.Initializers
 
         #region Implementation of ITelemetryInitializer
 
+        /// <summary>
+        /// Initializes the given <see cref="Microsoft.ApplicationInsights.Channel.ITelemetry"/>.
+        /// </summary>
         public void Initialize(ITelemetry telemetry)
         {
             if (String.IsNullOrWhiteSpace(telemetry.Context.Component.Version))

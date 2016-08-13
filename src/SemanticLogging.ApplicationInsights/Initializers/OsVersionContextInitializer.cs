@@ -1,11 +1,10 @@
 ﻿using System;
 using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.DataContracts;
-using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights.Extensibility.Implementation;
 
 // ReSharper disable once CheckNamespace
-namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility
+namespace Microsoft.ApplicationInsights.Extensibility
 {
     /// <summary>
     /// An <see cref="ITelemetryInitializer"/> implementation that appends the <see cref="Environment.OSVersion"/> to an Application Insights <see cref="ITelemetry.Context"/>
@@ -44,7 +43,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
         #region Implementation of ITelemetryInitializer
 
         /// <summary>
-        /// Initializes the given <see cref="T:Microsoft.ApplicationInsights.Channel.ITelemetry"/>.
+        /// Initializes the given <see cref="Microsoft.ApplicationInsights.Channel.ITelemetry"/>.
         /// </summary>
         public void Initialize(ITelemetry telemetry)
         {
