@@ -3,7 +3,6 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility;
 using System;
-using System.Collections.Generic;
 
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 {
@@ -15,6 +14,17 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         private readonly TelemetryClient _telemetryClient;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class and uses the default Instrumentation Key In the config file.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
+        /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
+        /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
+        public ApplicationInsightsSink(params ITelemetryInitializer[] telemetryInitializers)
+            : this(TelemetryConfiguration.Active.InstrumentationKey, telemetryInitializers)
+        {
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class with the specified Instrumentation Key and the optional telemetryInitialiazers.
         /// </summary>
         /// <exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
@@ -23,12 +33,21 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
         public ApplicationInsightsSink(string instrumentationKey, params ITelemetryInitializer[] telemetryInitializers)
         {
-            _telemetryClient = new TelemetryClient();
-            CheckInstrumentationkey(instrumentationKey);
+            if (instrumentationKey == null)
+            {
+                throw new ArgumentNullException(nameof(instrumentationKey));
+            }
+            if (String.IsNullOrWhiteSpace(instrumentationKey))
+            {
+                throw new ArgumentException("The Instrumentation Key is empty or consists solely of whitespace", nameof(instrumentationKey));
+            }
 
-            _telemetryClient.InstrumentationKey = instrumentationKey;
+            _telemetryClient = new TelemetryClient {InstrumentationKey = instrumentationKey};
 
-            AddInitializers(telemetryInitializers);
+            foreach (var telemetryInitializer in telemetryInitializers)
+            {
+                TelemetryConfiguration.Active.TelemetryInitializers.Add(telemetryInitializer);
+            }
         }
         
         /// <sumary>
@@ -37,50 +56,6 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
         /// </sumary>
         ~ApplicationInsightsSink() {
             _telemetryClient.Flush();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class and uses the default Instrumentation Key In the config file.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
-        /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
-        /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
-        public ApplicationInsightsSink(params ITelemetryInitializer[] telemetryInitializers)
-        {
-            _telemetryClient = new TelemetryClient();
-            CheckInstrumentationkey(TelemetryConfiguration.Active.InstrumentationKey);
-
-            AddInitializers(telemetryInitializers);
-        }
-
-        /// <summary>
-        /// Helper method to add initializers into <see cref="TelemetryConfiguration.TelemetryInitializers"/> in <see cref="TelemetryConfiguration.Active"/>
-        /// </summary>
-        /// <param name="telemetryInitializers">The (optional) Application Insights telemetry initializers.</param>
-        private static void AddInitializers(IEnumerable<ITelemetryInitializer> telemetryInitializers)
-        {
-            foreach (var telemetryInitializer in telemetryInitializers)
-            {
-                TelemetryConfiguration.Active.TelemetryInitializers.Add(telemetryInitializer);
-            }
-        }
-
-        /// <summary>
-        /// Method used to check if the instrumentation key provided is not null, whitespace or empty.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">Thrown if InstrumentationKey value is null.</exception>
-        /// <exception cref="ArgumentException">Thrown if the InstrumentationKey is empty</exception>
-        /// <param name="instrumentationKey"></param>
-        private static void CheckInstrumentationkey(string instrumentationKey)
-        {
-            if (String.IsNullOrWhiteSpace(instrumentationKey))
-            {
-                throw new ArgumentNullException(nameof(instrumentationKey));
-            }
-            if (instrumentationKey.Length == 0)
-            {
-                throw new ArgumentException("The Instrumentation Key is empty", nameof(instrumentationKey));
-            }
         }
 
         /// <summary>
