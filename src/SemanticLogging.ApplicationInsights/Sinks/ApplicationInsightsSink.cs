@@ -3,15 +3,21 @@ using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsights.Utility;
 using System;
+using System.Diagnostics;
 
 namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
 {
-    public sealed class ApplicationInsightsSink : IObserver<EventEntry>
+    public sealed class ApplicationInsightsSink : IObserver<EventEntry>, IDisposable
     {
         /// <summary>
         /// TelemetryClient used for sending logs to Application Insights
         /// </summary>
         private readonly TelemetryClient _telemetryClient;
+
+        /// <summary>
+        /// Indicated whether the sink has been disposed or not
+        /// </summary>
+        private bool _disposed = false;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationInsightsSink" /> class and uses the default Instrumentation Key In the config file.
@@ -50,12 +56,44 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.Sinks
             }
         }
         
+        ~ApplicationInsightsSink()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         /// <sumary>
-        /// Class destructor. Ensures all telemetry items are sent before object destruction.
-        /// This is done through a manual flush of the Telemetry Client object.
+        /// Ensures all telemetry items are sent before object destruction.
+        /// This is done by calling <see cref="TelemetryClient.Flush"/>.
         /// </sumary>
-        ~ApplicationInsightsSink() {
+        private void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (!disposing)
+            {
+                //we shouldn't reach here - sinks should be disposed of properly (typically by calling the associated SinkSubscription's Dispose method)
+                if (Debugger.IsAttached)
+                {
+                    Debugger.Break();
+                }
+                else
+                {
+                    _telemetryClient.TrackException(new InvalidOperationException($"{nameof(ApplicationInsightsSink)} was not disposed"));
+                }
+            }
+
             _telemetryClient.Flush();
+
+            _disposed = true;
         }
 
         /// <summary>
