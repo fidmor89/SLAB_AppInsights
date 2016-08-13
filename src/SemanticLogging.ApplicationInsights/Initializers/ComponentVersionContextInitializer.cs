@@ -24,7 +24,9 @@ namespace Microsoft.ApplicationInsights.Extensibility
         public ComponentVersionContextInitializer(string componentVersion = null)
         {
             _componentVersion = new Lazy<string>(() =>
-                String.IsNullOrWhiteSpace(componentVersion) ? (Assembly.GetEntryAssembly()?.ToString() ?? "Unknown") : componentVersion);
+                String.IsNullOrWhiteSpace(componentVersion)
+                    ? (Assembly.GetEntryAssembly()?.ToString() ?? Assembly.GetExecutingAssembly().ToString())
+                    : componentVersion);
         }
 
         #region Implementation of ITelemetryInitializer
