@@ -23,11 +23,22 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
         /// <param name="osVersion">The os version.</param>
         public OsVersionContextInitializer(string osVersion = null)
         {
-            _osVersion = new Lazy<string>(() => string.IsNullOrWhiteSpace(osVersion)
-                ? (Environment.OSVersion != null
-                    ? Environment.OSVersion.ToString()
-                    : String.Empty)
-                : osVersion);
+            _osVersion = new Lazy<string>(() =>
+            {
+                if (!String.IsNullOrWhiteSpace(osVersion))
+                {
+                    return osVersion;
+                }
+
+                try
+                {
+                    return Environment.OSVersion.ToString();
+                }
+                catch (InvalidOperationException e)
+                {
+                    return "Unknown: " + e;
+                }
+            });
         }
 
         #region Implementation of ITelemetryInitializer
@@ -37,7 +48,7 @@ namespace Microsoft.Practices.EnterpriseLibrary.SemanticLogging.ApplicationInsig
         /// </summary>
         public void Initialize(ITelemetry telemetry)
         {
-            if (telemetry?.Context != null && String.IsNullOrWhiteSpace(telemetry.Context.Device.OperatingSystem))
+            if (String.IsNullOrWhiteSpace(telemetry.Context.Device.OperatingSystem))
             {
                 telemetry.Context.Device.OperatingSystem = _osVersion.Value;
             }
