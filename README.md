@@ -2,7 +2,7 @@
 
 Send data from [Semantic Logging](https://github.com/mspnp/semantic-logging) to [Application Insights](https://azure.microsoft.com/services/application-insights/) for display, analysis and diagnostics.
 
-With [semantic logging](https://msdn.microsoft.com/library/dn440729.aspx), you call trace methods named for the event - for example, `log.GameWon(score)` instead of `log.InfoFormat("won a game, score {0}", score)`.  The [Semantic Logging Application Block](https://github.com/mspnp/semantic-logging) (SLAB) provides a useful framework on which you can create custom log methods and couple them to one or more sinks.
+With [semantic logging](https://msdn.microsoft.com/library/dn440729.aspx), you call trace methods named for the event - for example, `log.GameWon(score)` instead of `log.InfoFormat("won a game, score {0}", score)`.  The [Semantic Logging Application Block](https://github.com/mspnp/semantic-logging) (SLAB) provides a useful framework on which you can create custom log methods and couple them to one or more sinks, leveraging the highly performant Event Tracing for Windows (ETW).
 
 The purpose of this project is to integrate Semantic Logging with Application Insights. Log messages are sent to the Application Insights portal. Application Insights provides a powerful diagnostic search tool, which allows you to search and correlate associated events, including data from client, server and other components of your application. It also shows you charts of trends in performance and usage over time. By using SLAB to send the logs, you introduce an additional level of clarity to your trace code.
 
