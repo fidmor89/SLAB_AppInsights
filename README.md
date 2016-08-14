@@ -22,7 +22,7 @@ Special Thanks to
 Andrew Oakley for all his help with this project.
 
 
-Tags: Application Insights Semantic Logging Nuget
+Tags: App Insights Application Insights Semantic Logging Nuget SLAB ETW
 
 Requires: 
 - Newtonsoft.Json
