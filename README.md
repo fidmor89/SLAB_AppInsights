@@ -22,7 +22,7 @@ Special Thanks to
 Andrew Oakley for all his help with this project.
 
 
-Tags: App Insights Application Insights Semantic Logging Nuget SLAB ETW
+Tags: App-Insights Application-Insights Semantic-Logging Nuget SLAB Event-Tracing-for-Windows ETW
 
 Requires: 
 - Newtonsoft.Json
