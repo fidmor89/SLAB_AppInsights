@@ -15,6 +15,11 @@ The purpose of this project is to integrate Semantic Logging with Application In
   - <a href='https://github.com/jarodriguez08'>Jorge Andres Rodriguez Cuevas</a>.
   - <a href='https://github.com/herbertharriola'>Herberth Francisco Arriola</a>.
   - <a href='https://github.com/ohadschn'>Ohad Schneider</a>.
+  
+  - <a href='https://github.com/MedAnd'>MedAnd</a>.
+  - <a href='https://github.com/mbernard'>Miguel Bernard</a>.
+  - <a href='https://github.com/alancameronwills'>Alan Cameron Wills</a>.
+  
   - <a href='https://github.com/oscargarciacolon'>Oscar Garcia Colon - Teacher and Facilitator</a>.
   
 
@@ -67,7 +72,7 @@ Or using Visual Studio:
 
 
 ## Contributing ##
-All kinds of contributions are welcomed, from posting issues to fixes and enhacements. Just fork it, make some changes and make a pull request. We won't take long to review your changes and merge it to master branch. Just keep in mind that generating the package and updating it on nuget.org migth take us a few days.
+All kinds of contributions are welcomed, from posting issues to fixes and enhacements. Just fork it, make some changes and make a pull request. We won't take long to review your changes and merge it to master branch. Just keep in mind that generating the package and updating it on nuget.org migth take us a few days. Also feel free to add yourself to contributor list in this file when you make a pull request. 
 
 
 
