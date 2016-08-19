@@ -15,11 +15,9 @@ The purpose of this project is to integrate Semantic Logging with Application In
   - <a href='https://github.com/jarodriguez08'>Jorge Andres Rodriguez Cuevas</a>.
   - <a href='https://github.com/herbertharriola'>Herberth Francisco Arriola</a>.
   - <a href='https://github.com/ohadschn'>Ohad Schneider</a>.
-  
   - <a href='https://github.com/MedAnd'>MedAnd</a>.
   - <a href='https://github.com/mbernard'>Miguel Bernard</a>.
   - <a href='https://github.com/alancameronwills'>Alan Cameron Wills</a>.
-  
   - <a href='https://github.com/oscargarciacolon'>Oscar Garcia Colon - Teacher and Facilitator</a>.
   
 
