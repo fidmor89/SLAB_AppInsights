@@ -1,38 +1,32 @@
 ﻿using System;
+using System.Reflection;
 using Microsoft.ApplicationInsights.Channel;
+using Microsoft.ApplicationInsights.DataContracts;
+using Microsoft.ApplicationInsights.Extensibility.Implementation;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.ApplicationInsights.Extensibility
 {
     /// <summary>
-    /// An <see cref="ITelemetryInitializer"/> implementation that appends the application's version to an Application Insights <see cref="ITelemetry.Context"/>
+    /// An <see cref="ITelemetryInitializer"/> implementation that populates the <see cref="ComponentContext.Version"/> of an Application Insights <see cref="ITelemetry.Context"/>
     /// </summary>
     public class ApplicationVersionContextInitializer : ITelemetryInitializer
     {
         /// <summary>
-        /// Gets or sets the application version.
+        /// Lazily builds the value for the <see cref="ComponentContext.Version"/> property of the <see cref="TelemetryContext.Component"/> property in <see cref="ITelemetry.Context"/>.
         /// </summary>
-        /// <value>
-        /// The application version.
-        /// </value>
-        private readonly string _applicationVersion;
+        private readonly Lazy<string> _applicationVersion;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ApplicationVersionContextInitializer"/> class.
+        /// Initializes a new instance of the <see cref="ApplicationVersionContextInitializer" /> class.
         /// </summary>
-        /// <param name="applicationVersion">The application version.</param>
-        public ApplicationVersionContextInitializer(string applicationVersion)
+        /// <param name="applicationVersion">The application version. If null, calculated from <see cref="Assembly.GetEntryAssembly"/>.</param>
+        public ApplicationVersionContextInitializer(string applicationVersion = null)
         {
-            if (applicationVersion == null)
-            {
-                throw new ArgumentNullException(nameof(applicationVersion));
-            }
-            if (String.IsNullOrWhiteSpace(applicationVersion))
-            {
-                throw new ArgumentException("Application version is empty or consists solely of whitespace characters", nameof(applicationVersion));
-            }
-
-            _applicationVersion = applicationVersion;
+            _applicationVersion = new Lazy<string>(() =>
+                String.IsNullOrWhiteSpace(applicationVersion)
+                    ? (Assembly.GetEntryAssembly()?.ToString() ?? Assembly.GetExecutingAssembly().ToString())
+                    : applicationVersion);
         }
 
         #region Implementation of ITelemetryInitializer
@@ -44,9 +38,10 @@ namespace Microsoft.ApplicationInsights.Extensibility
         {
             if (String.IsNullOrWhiteSpace(telemetry.Context.Component.Version))
             {
-                telemetry.Context.Component.Version = _applicationVersion;
+                telemetry.Context.Component.Version = _applicationVersion.Value;
             }
         }
 
         #endregion
-    }}
+    }
+}

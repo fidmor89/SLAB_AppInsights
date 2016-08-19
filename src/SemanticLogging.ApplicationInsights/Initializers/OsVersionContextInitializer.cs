@@ -19,7 +19,7 @@ namespace Microsoft.ApplicationInsights.Extensibility
         /// <summary>
         /// Initializes a new instance of the <see cref="OsVersionContextInitializer" /> class.
         /// </summary>
-        /// <param name="osVersion">The os version.</param>
+        /// <param name="osVersion">The OS version. If null, calculated from <see cref="Environment.OSVersion"/>.</param>
         public OsVersionContextInitializer(string osVersion = null)
         {
             _osVersion = new Lazy<string>(() =>
