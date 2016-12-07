@@ -18,7 +18,7 @@ The purpose of this project is to integrate Semantic Logging with Application In
   - <a href='https://github.com/MedAnd'>MedAnd</a>.
   - <a href='https://github.com/mbernard'>Miguel Bernard</a>.
   - <a href='https://github.com/alancameronwills'>Alan Cameron Wills</a>.
-  - <a href='https://github.com/oscargarciacolon'>Oscar Garcia Colon - Teacher and Facilitator</a>.
+  - <a href='https://github.com/oscargarciacolon'>Oscar Garcia Colon</a>.
   
 
 Special Thanks to 
@@ -67,6 +67,10 @@ Or using Visual Studio:
 - Search for: SLAB_AI
 - Click Install
 
+## Usage ##
+
+#### Service Fabric 
+Andrej Medic did a great write-up on how to use this library with service fabric, if you are interested click <a href='http://www.medic-consulting.com/2016/08/12/Application-Insights-and-Semantic-Logging-for-Service-Fabric-Microservices/'>here</a>. 
 
 
 ## Contributing ##
