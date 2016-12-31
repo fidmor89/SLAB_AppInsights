@@ -37,11 +37,11 @@ Tested on:
 - EnterpriseLibrary.SemanticLogging (≥ 2.0.1406.1)
 - Microsoft.ApplicationInsights (≥ 0.17.1-beta)
 
-License: GNU GPL 3.0
+License: MIT
 
-License URI: http://opensource.org/licenses/GPL-3.0
+License URI: https://opensource.org/licenses/MIT
 
-Copyright 2015 The SL Integration with Application Insights Project Developers.
+Copyright (c) 2016 Fidel Esteban Morales Cifuentes
 
 
 
