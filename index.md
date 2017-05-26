@@ -2,7 +2,7 @@
 
 Send data from [Semantic Logging](https://github.com/mspnp/semantic-logging) to [Application Insights](https://azure.microsoft.com/services/application-insights/) for display, analysis and diagnostics.
 
-With [semantic logging](https://msdn.microsoft.com/library/dn440729.aspx), you call trace methods named for the event - for example, `log.GameWon(score)` instead of `log.InfoFormat("won a game, score {0}", score)`.  The [Semantic Logging Application Block](https://github.com/mspnp/semantic-logging) (SLAB) provides a useful framework on which you can create custom log methods and couple them to one or more sinks.
+With [semantic logging](https://msdn.microsoft.com/library/dn440729.aspx), you call trace methods named for the event - for example, `log.GameWon(score)` instead of `log.InfoFormat("won a game, score {0}", score)`.  The [Semantic Logging Application Block](https://github.com/mspnp/semantic-logging) (SLAB) provides a useful framework on which you can create custom log methods and couple them to one or more sinks, leveraging the highly performant Event Tracing for Windows (ETW).
 
 The purpose of this project is to integrate Semantic Logging with Application Insights. Log messages are sent to the Application Insights portal. Application Insights provides a powerful diagnostic search tool, which allows you to search and correlate associated events, including data from client, server and other components of your application. It also shows you charts of trends in performance and usage over time. By using SLAB to send the logs, you introduce an additional level of clarity to your trace code.
 
@@ -14,14 +14,18 @@ The purpose of this project is to integrate Semantic Logging with Application In
   - <a href='https://github.com/josemen'>Jose Carlos Mendez</a>.
   - <a href='https://github.com/jarodriguez08'>Jorge Andres Rodriguez Cuevas</a>.
   - <a href='https://github.com/herbertharriola'>Herberth Francisco Arriola</a>.
-  - <a href='https://github.com/oscargarciacolon'>Oscar Garcia Colon - Teacher and Facilitator</a>.
+  - <a href='https://github.com/ohadschn'>Ohad Schneider</a>.
+  - <a href='https://github.com/MedAnd'>MedAnd</a>.
+  - <a href='https://github.com/mbernard'>Miguel Bernard</a>.
+  - <a href='https://github.com/alancameronwills'>Alan Cameron Wills</a>.
+  - <a href='https://github.com/oscargarciacolon'>Oscar Garcia Colon</a>.
   
 
 Special Thanks to 
 Andrew Oakley for all his help with this project.
 
 
-Tags: Application Insights Semantic Logging Nuget
+Tags: App-Insights Application-Insights Semantic-Logging Nuget SLAB Event-Tracing-for-Windows ETW
 
 Requires: 
 - Newtonsoft.Json
@@ -33,11 +37,11 @@ Tested on:
 - EnterpriseLibrary.SemanticLogging (≥ 2.0.1406.1)
 - Microsoft.ApplicationInsights (≥ 0.17.1-beta)
 
-License: GNU GPL 3.0
+License: MIT
 
-License URI: http://opensource.org/licenses/GPL-3.0
+License URI: https://opensource.org/licenses/MIT
 
-Copyright 2015 The SL Integration with Application Insights Project Developers.
+Copyright (c) 2016 Fidel Esteban Morales Cifuentes
 
 
 
@@ -62,6 +66,15 @@ Or using Visual Studio:
 - Select Include Prerelease in the dropdown menu
 - Search for: SLAB_AI
 - Click Install
+
+## Usage ##
+
+#### Service Fabric 
+Andrej Medic did a great write-up on how to use this library with service fabric, if you are interested click <a href='http://www.medic-consulting.com/2016/08/12/Application-Insights-and-Semantic-Logging-for-Service-Fabric-Microservices/'>here</a>. 
+
+
+## Contributing ##
+All kinds of contributions are welcomed, from posting issues to fixes and enhacements. Just fork it, make some changes and make a pull request. We won't take long to review your changes and merge it to master branch. Just keep in mind that generating the package and updating it on nuget.org migth take us a few days. Also feel free to add yourself to contributor list in this file when you make a pull request. 
 
 
 
